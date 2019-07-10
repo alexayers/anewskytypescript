@@ -35,17 +35,36 @@ export class Scene {
         this._clickCallBack = func;
     }
 
-    public clearBackground(): void {
+    public playAmbience() : void {
+        if (this._ambientSound != null) {
+
+        }
+    }
+
+    public stopAmbience() : void {
 
     }
 
-    public clearMiddleground(): void {
+    public addDoor(door : Door) : void {
 
+    }
+
+    public addItem( item : Item): void {
+
+    }
+
+    public clearBackground(): void {
+        this._background = new AnimatedFrame();
+    }   
+
+    public clearMiddleground(): void {
+        this._middleground = new AnimatedFrame();
     }
 
     public clearForeground(): void {
-
+        this._foreground = new AnimatedFrame();
     }
+
 
 
 

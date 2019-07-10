@@ -3,7 +3,7 @@ export class AnimatedFrame {
     private _currentFrame : number;
     private _frameRate: number;
     private _tick : number;
-    private _frames : Array<number>;
+    private _frames : Array;
 
     constructor() {
         this._currentFrame = 0;
@@ -14,6 +14,11 @@ export class AnimatedFrame {
 
     public addFrame(filename: string): void {
         
+        let image = new Image();
+        image.src = filename;
+
+        this._frames.push(image);
+
     }
 
     public getTotalFrames()  : number {
@@ -21,6 +26,8 @@ export class AnimatedFrame {
     }
 
     public render() : void {
+
+        this._frameRate[this._currentFrame].draw
 
 
         this._tick++;

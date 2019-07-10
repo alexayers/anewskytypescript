@@ -1,16 +1,16 @@
 
 
 export class Event {
-    private _target: string;
+    private _channel: string;
     private _paylod: string;
 
-    constructor(target: string, payload: string) {
-        this._target = target;
+    constructor(_channel: string, payload: string) {
+        this._channel = _channel;
         this._paylod = payload;
     }
 
-    get target() {
-        return this._target;
+    get channel() {
+        return this._channel;
     }
 
     get payload() {

@@ -1,25 +1,37 @@
-import Point from "./point";
+import Point from "./containers/point";
 
-export default class Game {
-	private canvas: HTMLCanvasElement;
-	private ctx: CanvasRenderingContext2D;
-	private height: number = window.innerHeight;
-	private width: number = window.innerWidth;
+import { Event } from "./event/event";
+import { EventBus, EventHandler } from "./event/eventbus";
+
+export default class Game implements EventHandler {
+	private _canvas: HTMLCanvasElement;
+	private _ctx: CanvasRenderingContext2D;
+	private _height: number = window.innerHeight;
+	private _width: number = window.innerWidth;
+	private _eventBus: EventBus;
 
 	constructor() {
-		this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
-		this.canvas.width = this.width;
-		this.canvas.height = this.height;
-        this.ctx = this.canvas.getContext("2d");
-        this.ctx.imageSmoothingEnabled = false;
+		this._canvas = <HTMLCanvasElement>document.getElementById('canvas');
+		this._canvas.width = this._width;
+		this._canvas.height = this._height;
+		this._ctx = this._canvas.getContext("2d");
+		this._ctx.imageSmoothingEnabled = false;
+		this._eventBus = EventBus.getInstance();
 
-        
-        
+		this._eventBus.register("party", this);
+
 	}
 
 	public render(): void {
-        console.log('rendering');
-    }
-    
-   
+
+	//	let event: Event = new Event("party", "payload");
+	//	this._eventBus.publish(event);
+
+
+	}
+
+	public handleEvent(event: Event): void {
+	//	console.log("I got an event ->" + event.payload);
+	}
+
 }
