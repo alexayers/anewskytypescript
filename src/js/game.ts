@@ -21,7 +21,7 @@ export default class Game implements EventHandler {
 
 
 		this._ctx = this._canvas.getContext("2d");
-		//	this._ctx.imageSmoothingEnabled = false;
+		this._ctx.imageSmoothingEnabled = false;
 		this._eventBus = EventBus.getInstance();
 
 		this._eventBus.register("party", this);
@@ -46,7 +46,7 @@ export default class Game implements EventHandler {
 
 		this._ctx.fillRect(20, 20, 30, 30);
 
-		this._ctx.drawImage(this._image, 500, 500, 60, 60);
+		this._ctx.drawImage(this._image, 0, 0, this._canvas.width, this._canvas.height);
 
 	}
 

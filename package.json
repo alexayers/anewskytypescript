@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --open",
-    "prod": "webpack --production"
+    "prod": "webpack --production",
+    "build": "webpack"
   },
   "author": "Alex Ayers",
   "license": "ISC",
