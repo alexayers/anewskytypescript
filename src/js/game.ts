@@ -4,14 +4,13 @@ import { Event } from "./event/event";
 import { EventBus, EventHandler } from "./event/eventbus";
 
 
-
 export default class Game implements EventHandler {
 	private _canvas: HTMLCanvasElement;
 	private _ctx: CanvasRenderingContext2D;
 	private _height: number = window.innerHeight;
 	private _width: number = window.innerWidth;
 	private _eventBus: EventBus;
-	private _image: CanvasImageSource;
+	private _image: HTMLImageElement;
 
 	constructor() {
 		this._canvas = <HTMLCanvasElement>document.getElementById('canvas');
@@ -28,7 +27,7 @@ export default class Game implements EventHandler {
 		this._eventBus.register("party", this);
 
 		this._image = new Image();
-		this._image.src = "./begin1.png";
+		this._image.src = "assets/images/rooms/begin/begin1.png";
 
 		console.log(this._image);
 
@@ -47,7 +46,7 @@ export default class Game implements EventHandler {
 
 		this._ctx.fillRect(20, 20, 30, 30);
 
-		//this._ctx.drawImage(this._image, 0, 0, 512, 512);
+		this._ctx.drawImage(this._image, 500, 500, 60, 60);
 
 	}
 

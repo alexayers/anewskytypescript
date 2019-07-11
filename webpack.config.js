@@ -41,10 +41,9 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                exclude: /node_modules/,
-                use: 
-                    { loader: 'file-loader' }
-                
+                use: [
+                    'file-loader'
+                ]
             }
         ]
     },
@@ -52,5 +51,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         })
-    ],
+    ]
 }
