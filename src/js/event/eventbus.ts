@@ -24,7 +24,6 @@ export class EventBus {
         }
 
         this._channels.get(channel).push(eventhandler);
-
     }
 
     public publish(event: Event) {
@@ -35,7 +34,6 @@ export class EventBus {
 
             for (let listener of listeners) {
                 listener.handleEvent(event);
-
             }
         } else {
           //  console.log("No listeners registered for channel -> " + event.channel);

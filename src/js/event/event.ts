@@ -4,8 +4,8 @@ export class Event {
     private _channel: string;
     private _paylod: string;
 
-    constructor(_channel: string, payload: string) {
-        this._channel = _channel;
+    constructor(channel: string, payload: string) {
+        this._channel = channel;
         this._paylod = payload;
     }
 
