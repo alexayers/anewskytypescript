@@ -14,8 +14,7 @@ export class Item extends ClickBox {
         super(itemBuilder.lx,
             itemBuilder.ly,
             itemBuilder.hx,
-            itemBuilder.hy
-            );
+            itemBuilder.hy);
     }
     
 }
@@ -34,6 +33,7 @@ export class ItemBuilder {
     private _canClick : boolean;
     private _canExamine: boolean;
     private _callBack: Function;
+    
     
 
     get lx() : number {

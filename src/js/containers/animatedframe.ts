@@ -3,7 +3,7 @@ export class AnimatedFrame {
     private _currentFrame : number;
     private _frameRate: number;
     private _tick : number;
-    private _frames : Array;
+    private _frames : Array<HTMLImageElement>;
 
     constructor() {
         this._currentFrame = 0;
@@ -25,13 +25,18 @@ export class AnimatedFrame {
         return this._frames.length;
     }
 
-    public render() : void {
+    public render(renderContext:CanvasRenderingContext2D, canvas : HTMLCanvasElement) : void {
+        
 
-        this._frameRate[this._currentFrame].draw
-
+        renderContext.drawImage(
+            this._frames[this._currentFrame],
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
         this._tick++;
-
 
         if (this._tick == this._frameRate) {
             this._tick = 0;

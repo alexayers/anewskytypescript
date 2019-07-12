@@ -1,12 +1,14 @@
 
 import {ClickBox} from "./clickbox";
+import { EventHandler } from "../event/eventbus";
+import { Event } from "../event/event";
 
-export class Door extends ClickBox {
+export class Door extends ClickBox implements EventHandler {
 
-    private key : string;
-    private isLocked: boolean;
-    private destination: string;
-    private walkSound: string;
+    private _key : string;
+    private _isLocked: boolean;
+    private _destination: string;
+    private _walkSound: string;
 
     constructor(doorBuilder: DoorBuilder) {
         super(doorBuilder.lx,
@@ -14,10 +16,15 @@ export class Door extends ClickBox {
             doorBuilder.hx,
             doorBuilder.hy
             );
-        this.key = doorBuilder.key;
-        this.isLocked = doorBuilder.locked;
+        this._key = doorBuilder.key;
+        this._isLocked = doorBuilder.locked;
     }
 
+    public handleEvent(event: Event): void {
+       if ( event.payload == "unlock") {
+        this._isLocked = false;
+       }
+    }
  
 }
 
@@ -40,32 +47,14 @@ export class DoorBuilder {
         this._hy = hy;
         this._key = null;
         this._isLocked = false;
+        this._clickSound = null;
     }
 
-    get key() {
-        return this._key;
+    public requiresKey(key:string) : DoorBuilder {
+        this._key = key;
+        return this;
     }
-
-    get locked() {
-        return this._isLocked;
-    }
-
-    get lx() : number {
-        return this.lx;
-    }
-
-    get ly(): number {
-        return this.ly;
-    }
-
-    get hx(): number {
-        return this.hx;
-    }
-
-    get hy(): number {
-        return this.hy;
-    }
-
+     
     destination(destination: string) {
         this._destination = destination;
         return this;
@@ -90,4 +79,32 @@ export class DoorBuilder {
         return new Door(this);
     }
 
+ 
+    get key() {
+        return this._key;
+    }
+
+    get locked() {
+        return this._isLocked;
+    }
+
+    get lx() : number {
+        return this._lx;
+    }
+
+    get ly(): number {
+        return this._ly;
+    }
+
+    get hx(): number {
+        return this._hx;
+    }
+
+    get hy(): number {
+        return this._hy;
+    }
+
+    
+
+   
 }

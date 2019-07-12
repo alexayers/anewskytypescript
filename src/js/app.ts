@@ -11,14 +11,14 @@ class App {
 	}
 
 	public setup(): void {
-		// Any setup that is required that only runs once before game loads goes here
+		this._game.init();
 
 		this.gameLoop();
 	}
 
 	private gameLoop(): void {
-        // need to bind the current this reference to the callback
-		requestAnimationFrame(this.gameLoop.bind(this)); 
+		// need to bind the current this reference to the callback
+		requestAnimationFrame(this.gameLoop.bind(this));
 
 		this._game.render();
 	}

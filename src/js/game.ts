@@ -2,7 +2,7 @@ import Point from "./containers/point";
 
 import { Event } from "./event/event";
 import { EventBus, EventHandler } from "./event/eventbus";
-
+import { SceneManager } from "./managers/scenemanager";
 
 export default class Game implements EventHandler {
 	private _canvas: HTMLCanvasElement;
@@ -11,26 +11,24 @@ export default class Game implements EventHandler {
 	private _width: number = window.innerWidth;
 	private _eventBus: EventBus;
 	private _image: HTMLImageElement;
+	private _sceneManager: SceneManager;
 
 	constructor() {
 		this._canvas = <HTMLCanvasElement>document.getElementById('canvas');
 		this._canvas.width = this._width;
 		this._canvas.height = this._height;
-
 		this._canvas.addEventListener("mousedown", this.mouseDown, false);
-
-
 		this._ctx = this._canvas.getContext("2d");
 		this._ctx.imageSmoothingEnabled = false;
-		this._eventBus = EventBus.getInstance();
 
-		this._eventBus.register("party", this);
+	}
 
-		this._image = new Image();
-		this._image.src = "assets/images/rooms/begin/begin1.png";
+	public init(): void {
+		console.log("Initializing game...")
+		this._sceneManager = SceneManager.getInstance();
 
-		console.log(this._image);
 
+		console.log("Game initialized!")
 	}
 
 	private mouseDown(event: MouseEvent): void {
@@ -41,13 +39,8 @@ export default class Game implements EventHandler {
 
 	public render(): void {
 
-		//	let event: Event = new Event("party", "payload");
-		//	this._eventBus.publish(event);
-
-		this._ctx.fillRect(20, 20, 30, 30);
-
+		this._sceneManager.render(this._ctx, this._canvas);
 		this._ctx.drawImage(this._image, 0, 0, this._canvas.width, this._canvas.height);
-
 	}
 
 	public handleEvent(event: Event): void {

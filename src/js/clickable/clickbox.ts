@@ -16,16 +16,28 @@ export class ClickBox {
         this._hy = hy ;
     }
 
-    public setClickSound(clickSound: string) : void {
-        this._clickSound = clickSound;
-    }
-
-    public setTitle(title : string): void {
-        this._title = title;
-    }
-
-    public getTitle() : string {
+    get title() : string {
         return this._title;
+    }
+
+    get lx() : number {
+        return this._lx;
+    }
+
+    get ly() : number {
+        return this._ly;
+    }
+
+    get hx() : number {
+        return this._hx;
+    }
+
+    get hy() : number {
+        return this._hy;
+    }
+
+    get clickSound() : string {
+        return this._clickSound;
     }
 
     public isPointInSquare(x: number, y : number) : boolean {
