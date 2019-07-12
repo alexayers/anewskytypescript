@@ -11,7 +11,7 @@ export class Item extends ClickBox {
     private _canClick: boolean;
     private _canExamine: boolean;
     private _callBack: Function;
-    private _image:HTMLImageElement;
+    private _image: HTMLImageElement;
 
     constructor(itemBuilder: ItemBuilder) {
         super(itemBuilder.lx,
@@ -28,8 +28,8 @@ export class Item extends ClickBox {
         this._callBack = itemBuilder.callBack;
         this._image = itemBuilder.image;
     }
-    
-    public render(renderContext:CanvasRenderingContext2D, canvas:HTMLCanvasElement) : void {
+
+    public render(renderContext: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void {
 
         if (this._image != null && this._onScreen) {
             renderContext.drawImage(this._image, this._lx, this._ly);
@@ -37,15 +37,15 @@ export class Item extends ClickBox {
 
     }
 
-    public isPointWithItem(x: number, y: number) : boolean {
+    public isPointWithItem(x: number, y: number): boolean {
 
         if (!this._canGrab && !this._canClick) {
             return false;
         }
 
-        if (this.isPointInSquare(x,y)) {
+        if (this.isPointInSquare(x, y)) {
             if (this._clickSound != null) {
-                
+
             }
 
             if (this._canGrab && this._onScreen) {
@@ -80,7 +80,7 @@ export class ItemBuilder {
     private _canClick: boolean;
     private _canExamine: boolean;
     private _callBack: Function;
-    private _image:HTMLImageElement;
+    private _image: HTMLImageElement;
 
 
     constructor(lx: number, ly: number, hx: number, hy: number) {
@@ -149,19 +149,19 @@ export class ItemBuilder {
 
 
     get lx(): number {
-        return this.lx;
+        return this._lx;
     }
 
     get ly(): number {
-        return this.ly;
+        return this._ly;
     }
 
     get hx(): number {
-        return this.hx;
+        return this._hx;
     }
 
     get hy(): number {
-        return this.hy;
+        return this._hy;
     }
 
     get title(): string {

@@ -1,16 +1,16 @@
 
-import {AnimatedFrame} from "./animatedframe";
-import {Door} from "../clickable/door";
-import {Item} from "../clickable/item";
-import {EventBus, EventHandler} from "../event/eventbus";
-import {Event} from "../event/event";
-import {AudioManager} from "../managers/audiomanager";
-import {Inventory} from "../containers/inventory";
+import { AnimatedFrame } from "./animatedframe";
+import { Door } from "../clickable/door";
+import { Item } from "../clickable/item";
+import { EventBus, EventHandler } from "../event/eventbus";
+import { Event } from "../event/event";
+import { AudioManager } from "../managers/audiomanager";
+import { Inventory } from "../containers/inventory";
 
 export class Scene implements EventHandler {
-    private _background : AnimatedFrame;
-    private _middleground : AnimatedFrame;
-    private _foreground : AnimatedFrame;
+    private _background: AnimatedFrame;
+    private _middleground: AnimatedFrame;
+    private _foreground: AnimatedFrame;
     private _items: Array<Item>;
     private _doors: Array<Door>;
     private _ambientSound: string;
@@ -26,7 +26,7 @@ export class Scene implements EventHandler {
         this._doors = new Array();
     }
 
-    public addBackgroundImage(filename: string) : void {
+    public addBackgroundImage(filename: string): void {
         this._background.addFrame("assets/images/rooms/" + filename);
     }
 
@@ -46,31 +46,31 @@ export class Scene implements EventHandler {
         this._clickCallBack = func;
     }
 
-    public playAmbience() : void {
+    public playAmbience(): void {
         if (this._ambientSound != null) {
-           
+
         }
     }
 
-    public stopAmbience() : void {
+    public stopAmbience(): void {
 
     }
 
-    public addDoor(door : Door) : void {
+    public addDoor(door: Door): void {
         if (door.title != null) {
             EventBus
-            .getInstance()
-            .register(door.title, door);
+                .getInstance()
+                .register(door.title, door);
         }
     }
 
-    public addItem( item : Item): void {
+    public addItem(item: Item): void {
 
     }
 
     public clearBackground(): void {
         this._background = new AnimatedFrame();
-    }   
+    }
 
     public clearMiddleground(): void {
         this._middleground = new AnimatedFrame();
@@ -80,11 +80,11 @@ export class Scene implements EventHandler {
         this._foreground = new AnimatedFrame();
     }
 
-    public processClick(x: number, y:number): void {
+    public processClick(x: number, y: number): void {
 
         this._items.forEach(function (item) {
 
-            if (item.isPointWithItem(x,y)) {
+            if (item.isPointWithItem(x, y)) {
                 return;
             }
 
@@ -92,15 +92,19 @@ export class Scene implements EventHandler {
 
         this._doors.forEach(function (door) {
 
-            if (door.isPointWithinDoor(x,y)) {
-                
+            if (door.isPointWithinDoor(x, y)) {
+                console.log("Clicked in door");
             }
 
         });
 
+        if (this._clickCallBack != null) {
+            this._clickCallBack.call(x, y);
+        }
+
     }
 
-    public render(renderContext:CanvasRenderingContext2D, canvas:HTMLCanvasElement) : void {
+    public render(renderContext: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void {
 
         if (this._background.getTotalFrames() > 0) {
             this._background.render(renderContext, canvas);

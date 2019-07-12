@@ -1,6 +1,6 @@
 import { Scene } from "../containers/scene";
 import { EventBus, EventHandler } from "../event/eventbus";
-import {Event} from "../event/event";
+import { Event } from "../event/event";
 
 import { Begin } from "../scenes/begin";
 import { Room1 } from "../scenes/room1";
@@ -14,13 +14,13 @@ import { Room8 } from "../scenes/room8";
 import { Room9 } from "../scenes/room9";
 import { Room10 } from "../scenes/room10";
 import { Room12 } from "../scenes/room12";
-import { Room13 } from "../scenes/room14";
+import { Room13 } from "../scenes/room13";
 import { Room14 } from "../scenes/room14";
 import { Room15 } from "../scenes/room15";
 import { Room16 } from "../scenes/room16";
 import { Room17 } from "../scenes/room17";
 import { Room18 } from "../scenes/room18";
-import { Room19} from "../scenes/room19";
+import { Room19 } from "../scenes/room19";
 import { Room20 } from "../scenes/room20";
 import { Room21 } from "../scenes/room21";
 import { Room23 } from "../scenes/room23";
@@ -42,7 +42,7 @@ export class SceneManager implements EventHandler {
 
     private static _instance: SceneManager;
     private _scenes: Map<string, Scene>;
-    private _currentScene : string;
+    private _currentScene: string;
 
 
     private constructor() { }
@@ -56,7 +56,7 @@ export class SceneManager implements EventHandler {
         return SceneManager._instance;
     }
 
-    private init() : void {
+    private init(): void {
         this._scenes = new Map();
 
         this.registerScene("begin", new Begin());
@@ -99,16 +99,16 @@ export class SceneManager implements EventHandler {
 
     }
 
-    private registerScene(sceneName: string, scene : Scene) : void {
+    private registerScene(sceneName: string, scene: Scene): void {
         this._scenes.set(sceneName, scene);
         EventBus.getInstance().register(sceneName, scene);
     }
 
-    public processClick(x: number, y:number): void {
-        this._scenes.get(this._currentScene).processClick(x,y);
+    public processClick(x: number, y: number): void {
+        this._scenes.get(this._currentScene).processClick(x, y);
     }
 
-    public render(renderContext:CanvasRenderingContext2D, canvas:HTMLCanvasElement) : void {
+    public render(renderContext: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void {
         this._scenes.get(this._currentScene).render(renderContext, canvas);
     }
 
