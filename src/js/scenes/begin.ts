@@ -7,13 +7,13 @@ export class Begin extends Scene {
     constructor() {
         super();
 
-        this.addBackground("begin/begin1.png");
-        this.addBackground("begin/begin2.png");
-        this.addBackground("begin/begin3.png");
+        this.addBackgroundImage("begin/begin1.png");
+        this.addBackgroundImage("begin/begin2.png");
+        this.addBackgroundImage("begin/begin3.png");
 
         this.addDoor(
             new DoorBuilder(0,0,350,350)
-            .destination("room1")
+            .withDestination("room1")
             .build()
         )
     }

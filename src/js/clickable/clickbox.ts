@@ -2,18 +2,26 @@ import { throws } from "assert";
 
 
 export class ClickBox {
-    private _lx : number;
-    private _ly : number;
-    private _hx : number;
-    private _hy : number;
-    private _title: string;
-    private _clickSound: string;
+    protected _lx : number;
+    protected _ly : number;
+    protected _hx : number;
+    protected _hy : number;
+    protected _title: string;
+    protected _clickSound: string;
 
     constructor(lx: number, ly: number, hx: number, hy :number) {
         this._lx = lx;
         this._ly = ly;
         this._hx = hx;
-        this._hy = hy ;
+        this._hy = hy;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+
+    set clickSound(clickSound: string) {
+        this._clickSound = clickSound;
     }
 
     get title() : string {

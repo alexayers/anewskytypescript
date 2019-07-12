@@ -4,6 +4,8 @@ import {Door} from "../clickable/door";
 import {Item} from "../clickable/item";
 import {EventBus, EventHandler} from "../event/eventbus";
 import {Event} from "../event/event";
+import {AudioManager} from "../managers/audiomanager";
+import {Inventory} from "../containers/inventory";
 
 export class Scene implements EventHandler {
     private _background : AnimatedFrame;
@@ -19,17 +21,20 @@ export class Scene implements EventHandler {
         this._background = new AnimatedFrame();
         this._middleground = new AnimatedFrame();
         this._foreground = new AnimatedFrame();
+
+        this._items = new Array();
+        this._doors = new Array();
     }
 
-    public addBackground(filename: string) : void {
+    public addBackgroundImage(filename: string) : void {
         this._background.addFrame("assets/images/rooms/" + filename);
     }
 
-    public addMiddleground(filename: string): void {
+    public addMiddlegroundImage(filename: string): void {
         this._middleground.addFrame("assets/images/rooms/" + filename);
     }
 
-    public addForeground(filename: string): void {
+    public addForegroundImage(filename: string): void {
         this._foreground.addFrame("assets/images/rooms/" + filename);
     }
 
@@ -73,6 +78,26 @@ export class Scene implements EventHandler {
 
     public clearForeground(): void {
         this._foreground = new AnimatedFrame();
+    }
+
+    public processClick(x: number, y:number): void {
+
+        this._items.forEach(function (item) {
+
+            if (item.isPointWithItem(x,y)) {
+                return;
+            }
+
+        });
+
+        this._doors.forEach(function (door) {
+
+            if (door.isPointWithinDoor(x,y)) {
+                
+            }
+
+        });
+
     }
 
     public render(renderContext:CanvasRenderingContext2D, canvas:HTMLCanvasElement) : void {

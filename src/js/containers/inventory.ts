@@ -26,4 +26,60 @@ export class Inventory {
 
         return Inventory._instance;
     }
+
+    public render(renderContext:CanvasRenderingContext2D, canvas : HTMLCanvasElement) : void {
+    
+
+    }
+
+    public processClick(isLeftClick: boolean, isRightClick: boolean, x:number, y: number) : void {
+
+    }
+
+    public isExaming() : boolean {
+        return this._isExamining;
+    }
+
+    public dropSelected() : void {
+        this._slots[this._selectedIdx] = null;
+        this._selectedIdx = -1;
+    }
+
+    public getSelectedItem() : Item {
+        if (this._selectedIdx == -1) {
+            return null;
+        } else {
+            return this._slots[this._selectedIdx];
+        }
+    }
+
+    public isSelectedItem(itemName: string) : boolean {
+
+        if (this.getSelectedItem() != null) {
+            if (this.getSelectedItem().title == itemName) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
+
+    public addToInventory(itemToAdd:Item): void {
+
+        var idx = 0;
+
+        this._slots.forEach( function (item) {
+            if (item == null) {
+                this._slots[idx] = itemToAdd;
+                return;
+            }
+
+            idx++;
+        });
+
+
+    }
 }
