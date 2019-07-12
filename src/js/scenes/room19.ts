@@ -7,36 +7,35 @@ export class Room19 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room19/room19_1b.png');
+        this.addBackgroundImage('room19/room19_2b.png');
+        this.addBackgroundImage('room19/room19_3b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+
+        this.addMiddlegroundImage('room19/room19_1m.png');
+        this.addMiddlegroundImage('room19/room19_2m.png');
+        this.addMiddlegroundImage('room19/room19_3m.png');
+        this.addMiddlegroundImage('room19/room19_4m.png');
+        this.addMiddlegroundImage('room19/room19_5m.png');
+        this.addMiddlegroundImage('room19/room19_6m.png');
+
+        this.addDoor(new DoorBuilder(0, 0, 46, 350)
+            .withDestination('room18')
+            .withWalkSound('walk_building.ogg')
+            .build()
         );
-
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
+        this.addDoor(new DoorBuilder(109, 154, 163, 207)
+            .withDestination('room25')
+            .withWalkSound('walk_computer.ogg')
+            .build()
+        );
+        this.addDoor(new DoorBuilder(185, 221, 254, 257)
+            .withDestination('room30')
+            .withWalkSound('walk_computer.ogg')
             .build()
         );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
+        this.addAmbience('maproom.ogg');
     }
 
 

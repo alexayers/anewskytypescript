@@ -6,37 +6,73 @@ export class Room9 extends Scene {
 
     constructor() {
         super();
-
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
-
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+        this.addBackgroundImage('room9/room9_1b.png');
+        this.addBackgroundImage('room9/room9_2b.png');
+        this.addBackgroundImage('room9/room9_3b.png');
+    
+    
+        this.addMiddlegroundImage('room9/room9_1m.png');
+    
+    
+        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+                    .withDestination('room8')
+                    .withWalkSound('walk_sand.ogg')
+                    .build()
         );
 
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
-            .build()
-        );
-
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
+        this.addDoor(new DoorBuilder(281, 0, 350, 350)
+                    .withDestination('room10')
+                    .withWalkSound('walk_sand.ogg')
+                    .build());
+    
+    
+                    this.addItem(new ItemBuilder(132, 131, 184, 177)
+                    .withTitle('purple_pilar')
+                    .clickable()
+                    .withClickSound('rocks.ogg')
+                    .withValue('')
+                    .withCallBack({
+          if Inventory.instance.isSelectedItem('purple_crystal')
+            ItemManager.instance.getItem('purple_pilar').value('fixed')
+            Inventory.instance.dropSelected
+    
+            if ItemManager.instance.getItem('pink_pilar').getValue == 'fixed'
+              clearMiddleground
+              addMiddlegroundImage('room9/room9_1m_all.png')
+              addMiddlegroundImage('room9/room9_2m_all.png')
+              addMiddlegroundImage('room9/room9_3m_all.png')
+              EventBus.instance.publishEvent(Event.new('room30', 'updateMap'))
+            else
+              clearMiddleground
+              addMiddlegroundImage('room9/room9_1m_purple.png')
+            end
+          end
+        });
+    
+        addItem(new ItemBuilder(197, 65, 247, 140)
+                    .withTitle('pink_pilar')
+                    .clickable()
+                    .withClickSound('rocks.ogg')
+                    .withValue('')
+                    .withCallBack({
+          if Inventory.instance.isSelectedItem('pink_crystal')
+            ItemManager.instance.getItem('pink_pilar').value('fixed')
+            Inventory.instance.dropSelected
+    
+            if ItemManager.instance.getItem('purple_pilar').getValue == 'fixed'
+              clearMiddleground
+              addMiddlegroundImage('room9/room9_1m_all.png')
+              addMiddlegroundImage('room9/room9_2m_all.png')
+              addMiddlegroundImage('room9/room9_3m_all.png')
+              EventBus.instance.publishEvent(Event.new('room30', 'updateMap'))
+            else
+              clearMiddleground
+              addMiddlegroundImage('room9/room9_1m_pink.png')
+            end
+          end
+        });
+    
+        this.addAmbience('wind.ogg');
     }
 
 

@@ -7,36 +7,32 @@ export class Room15 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room15/room15_1b.png');
+        this.addBackgroundImage('room15/room15_2b.png');
+        this.addBackgroundImage('room15/room15_3b.png');
+        this.addBackgroundImage('room15/room15_4b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+        this.addForegroundImage('room15/room15_1f.png');
+
+
+        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+            .withDestination('room24')
+            .withWalkSound('walk_sand.ogg')
+            .build()
         );
-
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
+        this.addDoor(new DoorBuilder(315, 0, 350, 350)
+            .withDestination('room16')
+            .withWalkSound('walk_sand.ogg')
+            .build()
+        );
+        this.addDoor(new DoorBuilder(84, 98, 267, 258)
+            .withDestination('room13')
+            .withWalkSound('walk_sand.ogg')
             .build()
         );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
+
+        this.addAmbience('cave.ogg');
     }
 
 

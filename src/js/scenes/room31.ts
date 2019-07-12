@@ -7,36 +7,37 @@ export class Room31 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room31/room31_1b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
-        );
 
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
-            .build()
+        this.addDoor(new DoorBuilder(0, 0, 350, 130)
+                    .withDestination('room3')
+                    .withWalkSound('open_toolbox.ogg')
+                    .build()
         );
-
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
+        this.addDoor(new DoorBuilder(0, 239, 350, 350)
+                    .withDestination('room3')
+                    .withWalkSound('open_toolbox.ogg')
+                    .build()
         );
+    
+        this.addAmbience('bad_light.ogg');
+    
+        this.addItem(new ItemBuilder(128, 164, 294, 230)
+                    .clickable()
+                    .withClickSound('pickup.ogg')
+                    .withTitle('toolbox')
+                    .withCallBack( {
+          clearBackground
+          addBackgroundImage('room31/room31_1bb.png')
+          _hammer = Item.new(nil, nil, nil, nil)
+                        .filename('hammer.png')
+                        .title('hammer')
+          Inventory.instance.addToInventory(_hammer)
+          ItemManager.instance.getItem('toolbox')
+              .makeUnclickable
+    
+        });
     }
 
 

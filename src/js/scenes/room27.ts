@@ -7,36 +7,37 @@ export class Room27 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room27/room27_1b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+        this.addDoor(new DoorBuilder(0, 0, 350, 145)
+            .withDestination('room2')
+            .withWalkSound('walk_building.ogg')
+            .build()
         );
-
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
+        this.addDoor(new DoorBuilder(0, 237, 350, 350)
+            .withDestination('room2')
+            .withWalkSound('walk_building.ogg')
             .build()
         );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
+        this.addItem(new ItemBuilder(66, 180, 140, 215)
+            .withTitle('bed_photo')
+            .clickable()
+            .withClickSound('pickup.ogg')
+            .withCallBack( {
+                clearBackground
+          addBackgroundImage('room27/room27_1bb.png')
+    
+          _photo = Item.new(nil, nil, nil, nil)
+                    .filename('photo.png')
+                    .title('photo')
+    
+          Inventory.instance.addToInventory(_photo)
+          ItemManager.instance.getItem('bed_photo')
+                    .makeUnclickable
+            });
+
+        this.addAmbience('bad_light.ogg');
     }
 
 

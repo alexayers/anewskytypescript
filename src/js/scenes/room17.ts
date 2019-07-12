@@ -4,40 +4,45 @@ import { ItemBuilder } from "../clickable/item";
 
 export class Room17 extends Scene {
 
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+    this.addBackgroundImage('room17/room17_1b.png');
+    this.addMiddlegroundImage('room17/room17_1m.png');
+    this.addMiddlegroundImage('room17/room17_2m.png');
+    this.addMiddlegroundImage('room17/room17_3m.png');
+    this.addForegroundImage('room17/room17_1f.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
-        );
+    this.addDoor(new DoorBuilder(0, 0, 63, 350)
+      .withDestination('room16')
+      .withWalkSound('walk_sand.ogg')
+      .build()
+    );
 
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
-            .build()
-        );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
-    }
+    this.addItem(new ItemBuilder(98, 78, 251, 175)
+      .withTitle('glass_compartment')
+      .clickable()
+      .withCallBack( {
+        if ItemManager.instance.getItem('generator').getValue == 'powered'
+            clearForeground
+            clearMiddleground
+    
+            _pinkCrystal = Item.new(nil, nil, nil, nil)
+          .filename('pink_crystal.png')
+          .title('pink_crystal')
+            Inventory.instance.addToInventory(_pinkCrystal)
+            ItemManager.instance.getItem('glass_compartment').makeUnclickable
+            AudioManager.instance.play('open_compartment.ogg')
+          else
+            AudioManager.instance.play('touch_glass.ogg')
+          end
+
+
+      });
+
+    this.addAmbience('cave.ogg');
+  }
 
 
 }

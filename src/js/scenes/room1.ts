@@ -9,9 +9,9 @@ export class Room1 extends Scene {
         super();
 
         this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addForegroundImage('room1/room1_1f.png');
+        this.addForegroundImage('room1/room1_2f.png');
+        this.addForegroundImage('room1/room1_3f.png');
 
         this.addDoor(
             new DoorBuilder(0, 0, 42, 348)

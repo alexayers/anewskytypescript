@@ -28,7 +28,6 @@ import { Room24 } from "../scenes/room24";
 import { Room25 } from "../scenes/room25";
 import { Room26 } from "../scenes/room26";
 import { Room27 } from "../scenes/room27";
-import { Room28 } from "../scenes/room28";
 import { Room29 } from "../scenes/room29";
 import { Room30 } from "../scenes/room30";
 import { Room31 } from "../scenes/room31";
@@ -86,7 +85,6 @@ export class SceneManager implements EventHandler {
         this.registerScene("room25", new Room25());
         this.registerScene("room26", new Room26());
         this.registerScene("room27", new Room27());
-        this.registerScene("room28", new Room28());
         this.registerScene("room29", new Room29());
         this.registerScene("room30", new Room30());
         this.registerScene("room31", new Room31());

@@ -7,36 +7,47 @@ export class Room32 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room32/room32_1b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+
+        this.addForegroundImage('room32/room32_1f.png');
+
+        this.addDoor(new DoorBuilder(0, 0, 41, 240)
+            .withDestination('room24')
+            .withWalkSound('walk_computer.ogg')
+            .build()
         );
-
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
+        this.addDoor(new DoorBuilder(270, 0, 350, 230)
+            .withDestination('room24')
+            .withWalkSound('walk_computer.ogg')
             .build()
         );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
+        this.addItem(new ItemBuilder(249, 247, 320, 284)
+            .clickable()
+            .withTitle('release_storage')
+            .withCallBack( {
+                clearBackground
+      addBackgroundImage('room32/room32_1bb.png')
+      ItemManager.instance.getItem('empty_storage')
+                    .clickable
+
+            });
+
+        this.addItem(new ItemBuilder(72, 188, 115, 246)
+            .withTitle('empty_storage')
+            .withCallBack( {
+                clearForeground
+      _storageDevice = Item.new(nil, nil, nil, nil)
+                    .filename('storage.png')
+                    .title('storage_device')
+                    .value('empty')
+      Inventory.instance.addToInventory(_storageDevice)
+      AudioManager.instance.play('good_code.ogg')
+
+            });
+
+        this.addAmbience('cave.ogg');
     }
 
 

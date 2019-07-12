@@ -103,6 +103,11 @@ export class DoorBuilder {
         return this;
     }
 
+    public withClickSound(filename: string) : DoorBuilder {
+        this._clickSound = filename;
+        return this;
+    }
+
     public withWalkSound(filename: string): DoorBuilder {
         this._walkSound = filename;
         return this;

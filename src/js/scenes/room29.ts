@@ -7,37 +7,32 @@ export class Room29 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
-
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
+        this.addBackgroundImage('room29/room29_1b.png');
+        this.addMiddlegroundImage('room29/room29_1m.png');
+    
+        this.addDoor(new DoorBuilder(0, 0, 337, 121)
+                    .withDestination('room12')
+                    .withWalkSound('walk_sand.ogg')
+                    .build()
         );
-
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
-            .build()
-        );
-
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
-        );
-    }
+    
+        this.addItem(new ItemBuilder(46, 140, 331, 314)
+                    .clickable()
+                    .withTitle('trunk')
+                    .withClickSound('remove_power.ogg')
+                    .withCallBack( {
+          clearMiddleground
+          _powercell = Item.new(nil, nil, nil, nil)
+                           .filename('power_cell.png')
+                           .title('power_cell')
+    
+          Inventory.instance.addToInventory(_powercell)
+          ItemManager.instance.getItem('trunk')
+              .makeUnclickable
+    
+        });
+    
+        this.addAmbience('spaceship.ogg');
 
 
 }

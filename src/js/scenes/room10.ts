@@ -7,36 +7,45 @@ export class Room10 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage("room1/room1_1b.png");
-        this.addForegroundImage('room1/room1_1f.png')
-        this.addForegroundImage('room1/room1_2f.png')
-        this.addForegroundImage('room1/room1_3f.png')
+        this.addBackgroundImage('room10/room10_1b.png');
+        this.addBackgroundImage('room10/room10_2b.png');
+        this.addBackgroundImage('room10/room10_3b.png');
 
-        this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
-                .withDestination("room2")
-                .withWalkSound("walk_building")
-                .build()
-        );
+        this.addMiddlegroundImage('room10/room10_1m.png');
+        this.addMiddlegroundImage('room10/room10_2m.png');
+        this.addMiddlegroundImage('room10/room10_3m.png');
 
-        this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
-            .withDestination('room4')
-            .withWalkSound('walk_building')
-            .lock()
-            .withTitle('broken_door')
+
+        this.addForegroundImage('room10/room10_1f.png');
+        this.addForegroundImage('room10/room10_2f.png');
+        this.addForegroundImage('room10/room10_3f.png');
+        this.addForegroundImage('room10/room10_4f.png');
+
+        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+            .withDestination('room9')
+            .withWalkSound('walk_sand.ogg')
             .build()
         );
 
-        this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
-            .withTitle('key')
-            .withImage('key.png')
-            .grabble()
-            .withClickSound('pickup_keys.ogg')
-            .viewable()
-            .build()
+        this.addItem(new ItemBuilder(219, 66, 297, 281)
+            .clickable()
+            .withTitle('parachute')
+            .withClickSound('sail.ogg')
+            .withCallBack( {
+                clearMiddleground
+          addMiddlegroundImage('room10/room10_no_chute_m.png')
+          _sail = Item.new(nil, nil, nil, nil)
+                    .filename('parachute.png')
+                    .title('parachute')
+          Inventory.instance.addToInventory(_sail)
+          ItemManager.instance.getItem('parachute')
+                    .makeUnclickable
+
+            }
         );
+
+
+        this.addAmbience('wind.ogg');
     }
 
 
