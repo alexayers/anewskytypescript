@@ -2,8 +2,10 @@
 import { ClickBox } from './clickbox';
 import { Inventory } from '../containers/inventory';
 import { AudioManager } from '../managers/audiomanager';
+import { EventHandler } from "../event/eventbus";
+import { Event } from "../event/event";
 
-export class Item extends ClickBox {
+export class Item extends ClickBox implements EventHandler {
     private _imageExamine: string;
     private _value: string;
     private _canGrab: boolean;
@@ -62,6 +64,10 @@ export class Item extends ClickBox {
 
         return false;
 
+    }
+
+    public handleEvent(event: Event): void {
+        // stub
     }
 
 }

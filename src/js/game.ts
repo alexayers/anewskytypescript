@@ -29,6 +29,8 @@ export default class Game implements EventHandler {
 
 		this._rightClick = false;
 		this._leftClick = false;
+
+		EventBus.getInstance().register("game", this);
 	}
 
 	public init(): void {
@@ -41,19 +43,11 @@ export default class Game implements EventHandler {
 
 	private mouseDown(event: MouseEvent): void {
 
-		if (event.button == 0) {
-			this._leftClick = true;
-			this._rightClick = false;
-		} else if (event.button == 2) {
-			this._rightClick = true;
-			this._leftClick = false;
-		}
+		EventBus.getInstance().publish(
+			new Event("game", event)
+		);
 
-		let canvas = <HTMLCanvasElement>document.getElementById('canvas');
-		this._mouseX = event.clientX - canvas.offsetLeft;
-		this._mouseY = event.clientY - canvas.offsetTop;
-
-		console.log("Clicked x=" + this._mouseX + " y= " + this._mouseY);
+		
 
 	}
 
@@ -61,11 +55,19 @@ export default class Game implements EventHandler {
 
 		this._sceneManager.render(this._ctx, this._canvas);
 
-		if (!Inventory.getInstance().isExaming() && this._leftClick) {
-			this._sceneManager.processClick(this._mouseX, this._mouseY)
-		}
+		console.log(this._leftClick);
 
-		Inventory.getInstance().render(this._ctx, this._canvas);
+		if (!Inventory.getInstance().isExaming() && this._leftClick) {
+			SceneManager.getInstance().processClick(this._mouseX, this._mouseY)
+		} else {
+			Inventory
+				.getInstance()
+				.processClick(
+					this._leftClick,
+					this._rightClick,
+					this._mouseX,
+					this._mouseY);
+		}
 
 		Inventory
 			.getInstance()
@@ -75,12 +77,28 @@ export default class Game implements EventHandler {
 				this._mouseX,
 				this._mouseY);
 
-		this._rightClick = false;
-		this._leftClick = false;
+		Inventory.getInstance().render(this._ctx, this._canvas);
+
+
 	}
 
 	public handleEvent(event: Event): void {
-		//	console.log("I got an event ->" + event.payload);
+
+		let mouseEvent = event.payload;
+
+		if (mouseEvent.button == 0) {
+			this._leftClick = true;
+			this._rightClick = false;
+		} else if (mouseEvent.button == 2) {
+			this._leftClick = false;
+			this._rightClick = true;
+		}
+
+		let canvas = <HTMLCanvasElement>document.getElementById('canvas');
+		this._mouseX = mouseEvent.clientX - canvas.offsetLeft;
+		this._mouseY = ((mouseEvent.clientY - canvas.offsetTop) - 400) * -1;
+
+		console.log("Clicked x=" + this._mouseX + " y= " + this._mouseY);
 	}
 
 }

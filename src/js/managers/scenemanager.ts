@@ -96,6 +96,7 @@ export class SceneManager implements EventHandler {
 
 
         this._currentScene = "begin";
+        EventBus.getInstance().register("sceneManager", this);
 
     }
 
@@ -113,6 +114,12 @@ export class SceneManager implements EventHandler {
     }
 
     public handleEvent(event: Event): void {
-        // Stub
+        if (this._scenes.get(this._currentScene).ambienceName != this._scenes.get(event.payload).ambienceName) {
+            this._scenes.get(this._currentScene).stopAmbience();
+            this._scenes.get(event.payload).playAmbience();
+        }
+
+        this._currentScene = event.payload;
+        console.log("Moving to room -> " + event.payload);
     }
 }

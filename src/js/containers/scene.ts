@@ -62,10 +62,16 @@ export class Scene implements EventHandler {
                 .getInstance()
                 .register(door.title, door);
         }
+
+        this._doors.push(door);
     }
 
     public addItem(item: Item): void {
+        EventBus
+            .getInstance()
+            .register(item.title, item);
 
+        this._items.push(item);
     }
 
     public clearBackground(): void {
@@ -93,7 +99,7 @@ export class Scene implements EventHandler {
         this._doors.forEach(function (door) {
 
             if (door.isPointWithinDoor(x, y)) {
-                console.log("Clicked in door");
+                
             }
 
         });
@@ -124,5 +130,8 @@ export class Scene implements EventHandler {
         // Stub
     }
 
+    get ambienceName() : string {
+        return this._ambientSound;
+    }
 }
 

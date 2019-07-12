@@ -32,6 +32,7 @@ export class Door extends ClickBox implements EventHandler {
 
         if (this.isPointInSquare(x, y)) {
 
+
             if (this._clickSound != null) {
                 AudioManager.getInstance().play(this._clickSound);
             }
@@ -39,14 +40,13 @@ export class Door extends ClickBox implements EventHandler {
             if (this._isLocked) {
                 if (Inventory.getInstance().getSelectedItem() != null) {
                     if (Inventory.getInstance().getSelectedItem().title != this._key) {
+                        console.log("Door is locked");
                         return true;
                     } else if (this._isLocked && Inventory.getInstance().getSelectedItem().title == this._key) {
                         this._isLocked = false;
                         Inventory.getInstance().dropSelected();
                     }
                 }
-            } else {
-                return true;
             }
 
             if (this._walkSound != null) {

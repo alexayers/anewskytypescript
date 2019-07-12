@@ -2,11 +2,11 @@
 
 export class Event {
     private _channel: string;
-    private _paylod: string;
+    private _payload: any;
 
-    constructor(channel: string, payload: string) {
+    constructor(channel: string, payload: any) {
         this._channel = channel;
-        this._paylod = payload;
+        this._payload = payload;
     }
 
     get channel() {
@@ -14,6 +14,6 @@ export class Event {
     }
 
     get payload() {
-        return this._paylod;
+        return this._payload;
     }
 }
