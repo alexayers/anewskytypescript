@@ -1,6 +1,9 @@
 import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
+import {AudioManager} from "../managers/audiomanager";
+import {ItemManager} from "../managers/itemmanager";
+import { Inventory} from "../containers/inventory";
 
 export class Room32 extends Scene {
 
@@ -26,26 +29,32 @@ export class Room32 extends Scene {
         this.addItem(new ItemBuilder(249, 247, 320, 284)
             .clickable()
             .withTitle('release_storage')
-            .withCallBack( {
-                clearBackground
-      addBackgroundImage('room32/room32_1bb.png')
-      ItemManager.instance.getItem('empty_storage')
-                    .clickable
+            .withCallBack(() => {
+                this.clearBackground();
+                this.addBackgroundImage('room32/room32_1bb.png');
+      ItemManager.getInstance().getItem('empty_storage')
+                    .clickable();
 
-            });
+            })
+            .build()
+        );
 
         this.addItem(new ItemBuilder(72, 188, 115, 246)
             .withTitle('empty_storage')
-            .withCallBack( {
-                clearForeground
-      _storageDevice = Item.new(nil, nil, nil, nil)
-                    .filename('storage.png')
-                    .title('storage_device')
-                    .value('empty')
-      Inventory.instance.addToInventory(_storageDevice)
-      AudioManager.instance.play('good_code.ogg')
+            .withCallBack(() => {
+                this.clearForeground();
+      let storageDevice = new ItemBuilder(null, null, null, null)
+                    .withImage('storage.png')
+                    .withTitle('storage_device')
+                    .withValue('empty')
+                    .build();
 
-            });
+      Inventory.getInstance().addToInventory(storageDevice);
+      AudioManager.getInstance().play('good_code.ogg');
+
+            })
+            .build()
+        );
 
         this.addAmbience('cave.ogg');
     }

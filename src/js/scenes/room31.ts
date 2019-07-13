@@ -2,6 +2,9 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room31 extends Scene {
 
     constructor() {
@@ -27,17 +30,21 @@ export class Room31 extends Scene {
                     .clickable()
                     .withClickSound('pickup.ogg')
                     .withTitle('toolbox')
-                    .withCallBack( {
-          clearBackground
-          addBackgroundImage('room31/room31_1bb.png')
-          _hammer = Item.new(nil, nil, nil, nil)
-                        .filename('hammer.png')
-                        .title('hammer')
-          Inventory.instance.addToInventory(_hammer)
-          ItemManager.instance.getItem('toolbox')
-              .makeUnclickable
+                    .withCallBack(() => {
+          this.clearBackground();
+          this.addBackgroundImage('room31/room31_1bb.png')
+          let hammer = new ItemBuilder(null, null, null, null)
+                        .withImage('hammer.png')
+                        .withTitle('hammer')
+                        .build();
+
+          Inventory.getInstance().addToInventory(hammer)
+          ItemManager.getInstance().getItem('toolbox')
+              .makeUnclickable();
     
-        });
+        })
+        .build()
+        );
     }
 
 

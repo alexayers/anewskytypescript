@@ -1,6 +1,8 @@
 import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
 
 export class Room18 extends Scene {
 
@@ -32,17 +34,21 @@ export class Room18 extends Scene {
             .clickable()
             .withTitle('room_shovel')
             .withClickSound('pickup.ogg')
-            .withCallBack ({
-                clearForeground
-      addForegroundImage('room18/nothing.png')
-      _shovel = Item.new(nil, nil, nil, nil)
-                    .filename('shovel.png')
-                    .title('shovel')
-      Inventory.instance.addToInventory(_shovel)
-      ItemManager.instance.getItem('room_shovel')
-                    .makeUnclickable
+            .withCallBack (() => {
+                this.clearForeground
+      this.addForegroundImage('room18/nothing.png')
+      let shovel = new ItemBuilder(null, null, null, null)
+                    .withImage('shovel.png')
+                    .withTitle('shovel')
+                    .build();
+
+      Inventory.getInstance().addToInventory(shovel)
+      ItemManager.getInstance().getItem('room_shovel')
+                    .makeUnclickable();
 
             }
+        )
+        .build()
         );
 
         this.addAmbience('maproom.ogg');

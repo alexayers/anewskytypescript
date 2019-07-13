@@ -66,6 +66,22 @@ export class Item extends ClickBox implements EventHandler {
 
     }
 
+    public makeUnclickable() : void {
+        this._canClick = false;
+    }
+
+    public clickable() : void {
+        this._canClick = true;
+    }
+
+    get value() : string {
+        return this._value;
+    }
+
+    set value(value:string)  {
+        this._value = value;
+    }
+
     public handleEvent(event: Event): void {
         // stub
     }

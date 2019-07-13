@@ -2,6 +2,11 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import { AudioManager} from "../managers/audiomanager";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room25 extends Scene {
 
   constructor() {
@@ -25,55 +30,61 @@ export class Room25 extends Scene {
 
     this.addItem(new ItemBuilder(53, 219, 106, 252)
       .clickable()
-      .withCallBack( {
-        if Inventory.instance.isSelectedItem('storage_device')
-            clearBackground
-            addBackgroundImage('room25/room25_1bb.png')
-            addBackgroundImage('room25/room25_2bb.png')
-            addBackgroundImage('room25/room25_3bb.png')
-            addBackgroundImage('room25/room25_4bb.png')
+      .withCallBack(() => {
+        if (Inventory.getInstance().isSelectedItem('storage_device')) {
+          this.clearBackground();
+          this.addBackgroundImage('room25/room25_1bb.png');
+          this.addBackgroundImage('room25/room25_2bb.png');
+          this.addBackgroundImage('room25/room25_3bb.png');
+          this.addBackgroundImage('room25/room25_4bb.png');
     
-            addMiddlegroundImage('room25/room25_1m.png')
+          this.addMiddlegroundImage('room25/room25_1m.png');
     
-            _mapPadEnter = ItemManager.instance.getItem('mapPadEnter')
+            let mapPadEnter = ItemManager.getInstance().getItem('mapPadEnter');
     
-            if _mapPadEnter.getValue == 'ready'
-              addForegroundImage('room25/room25_1f_map.png')
-            else
-              addForegroundImage('room25/room25_1f.png')
-            end
+            if (mapPadEnter.value == 'ready') {
+              this.addForegroundImage('room25/room25_1f_map.png');
+            } else {
+              this.addForegroundImage('room25/room25_1f.png');
+            }
     
-            Inventory.instance.dropSelected
-          end
-      });
+            Inventory.getInstance().dropSelected();
+        }
+      })
+      .build()
+    );
 
 
     this.addItem(new ItemBuilder(240, 271, 304, 306)
       .clickable()
       .withTitle('mapload_enter')
-      .withCallBack( {
-        _mapPadEnter = ItemManager.instance.getItem('mapPadEnter')
+      .withCallBack(() => {
+        let mapPadEnter = ItemManager.getInstance().getItem('mapPadEnter');
     
-          if _mapPadEnter.getValue == 'ready'
+          if (mapPadEnter.value == 'ready') {
     
-            _storageDevice = Item.new(nil, nil, nil, nil)
-          .value('gps_loaded')
-          .title('gpsDevice')
-          .filename('storage.png')
+            let storageDevice = new ItemBuilder(null, null, null, null)
+          .withValue('gps_loaded')
+          .withTitle('gpsDevice')
+          .withImage('storage.png')
+    .build();
     
-            clearMiddleground
-            clearForeground
-            addForegroundImage('room25/room25_1f_storage.png')
-            ItemManager.instance.getItem('mapload_enter')
-          .makeUnclickable
+          this.clearMiddleground();
+          this.clearForeground();
+          this.addForegroundImage('room25/room25_1f_storage.png');
+            ItemManager.getInstance().getItem('mapload_enter')
+            .makeUnclickable();
+         
     
-            Inventory.instance.addToInventory(_storageDevice)
-            AudioManager.instance.play('good_code.ogg')
-          else
-            AudioManager.instance.play('bad_code.ogg')
-          end
+            Inventory.getInstance().addToInventory(storageDevice);
+            AudioManager.getInstance().play('good_code.ogg');
+          } else {
+            AudioManager.getInstance().play('bad_code.ogg');
+          }
 
-      });
+      })
+      .build()
+    );
 
     this.addAmbience('maproom.ogg');
   }

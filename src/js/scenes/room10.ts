@@ -2,6 +2,9 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room10 extends Scene {
 
     constructor() {
@@ -31,17 +34,21 @@ export class Room10 extends Scene {
             .clickable()
             .withTitle('parachute')
             .withClickSound('sail.ogg')
-            .withCallBack( {
-                clearMiddleground
-          addMiddlegroundImage('room10/room10_no_chute_m.png')
-          _sail = Item.new(nil, nil, nil, nil)
-                    .filename('parachute.png')
-                    .title('parachute')
-          Inventory.instance.addToInventory(_sail)
-          ItemManager.instance.getItem('parachute')
-                    .makeUnclickable
+            .withCallBack(() => {
+                this.clearMiddleground();
+          this.addMiddlegroundImage('room10/room10_no_chute_m.png')
+          let sail = new ItemBuilder(null, null, null, null)
+                    .withImage('parachute.png')
+                    .withTitle('parachute')
+                    .build();
+
+          Inventory.getInstance().addToInventory(sail);
+          ItemManager.getInstance().getItem('parachute')
+                    .makeUnclickable();
 
             }
+        )
+        .build()
         );
 
 

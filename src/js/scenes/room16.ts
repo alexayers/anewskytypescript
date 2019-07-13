@@ -2,6 +2,12 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import {Event} from "../event/event";
+import { AudioManager} from "../managers/audiomanager";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room16 extends Scene {
 
   constructor() {
@@ -34,27 +40,27 @@ export class Room16 extends Scene {
       .withTitle('generator')
       .clickable()
       .withValue('not_powered')
-      .withCallBack( {
-        if Inventory.instance.isSelectedItem('power_cell')
-            ItemManager.instance.getItem('generator').value('powered')
-            Inventory.instance.dropSelected
-            ItemManager.instance.getItem('generator').makeUnclickable
+      .withCallBack(() => {
+        if (Inventory.getInstance().isSelectedItem('power_cell')) {
+            ItemManager.getInstance().getItem('generator').value  = 'powered';
+            Inventory.getInstance().dropSelected();
+            ItemManager.getInstance().getItem('generator').makeUnclickable();
     
-            clearForeground
-            addForegroundImage('room16/room16_1fb.png')
+            this.clearForeground();
+            this.addForegroundImage('room16/room16_1fb.png');
     
-            EventBus.instance.publishEvent(Event.new('room24', 'power'))
-            EventBus.instance.publishEvent(Event.new('room17', 'power'))
+            EventBus.getInstance().publish(new Event('room24', 'power'));
+            EventBus.getInstance().publish(new Event('room17', 'power'));
     
-            EventBus.instance.publishEvent(Event.new('broken_door', 'unlock'))
+            EventBus.getInstance().publish(new Event('broken_door', 'unlock'));
     
-            AudioManager.instance.play('remove_power.ogg')
-          else
-            AudioManager.instance.play('empty_supply.ogg')
-          end
+            AudioManager.getInstance().play('remove_power.ogg');
+        } else {
+            AudioManager.getInstance().play('empty_supply.ogg');
+        }
 
 
-      });
+      }).build());
 
     this.addAmbience('cave.ogg');
   }

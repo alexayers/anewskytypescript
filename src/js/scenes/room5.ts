@@ -2,14 +2,20 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import {Event} from "../event/event";
+import { AudioManager} from "../managers/audiomanager";
+
 export class Room5 extends Scene {
+
+
 
     constructor() {
         super();
         this.addBackgroundImage('room5/room5_1b.png');
         this.addBackgroundImage('room5/room5_2b.png');
         this.addBackgroundImage('room5/room5_3b.png');
-    
         this.addMiddlegroundImage('room5/room5_1m.png');
         this.addMiddlegroundImage('room5/room5_2m.png');
     
@@ -31,20 +37,21 @@ export class Room5 extends Scene {
         this.addItem(new ItemBuilder(270, 183, 302, 230)
                     .withTitle('keyreader')
                     .clickable()
-                    .withCallBack( {
-          if Inventory.instance.isSelectedItem('keycard')
-            Inventory.instance.dropSelected
-            clearMiddleground
-            addMiddlegroundImage('room5/room5_1mb.png')
-            addMiddlegroundImage('room5/room5_2mb.png')
+                    .withCallBack(() =>  {
+          if (Inventory.getInstance().isSelectedItem('keycard')) {
+            Inventory.getInstance().dropSelected();
+            this.clearMiddleground();
+            this.addMiddlegroundImage('room5/room5_1mb.png');
+            this.addMiddlegroundImage('room5/room5_2mb.png');
     
-            EventBus.instance.publishEvent(Event.new('slide_door', 'unlock'))
+            EventBus.getInstance().publish(new Event('slide_door', 'unlock'));
     
-            AudioManager.instance.play('slide_door.ogg')
-          end
+            AudioManager.getInstance().play('slide_door.ogg');
+          }
     
     
-        });
+        })
+        .build());
     
     
         this.addAmbience('wind.ogg');

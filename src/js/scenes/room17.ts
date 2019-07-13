@@ -2,6 +2,11 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import { AudioManager} from "../managers/audiomanager";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room17 extends Scene {
 
   constructor() {
@@ -23,23 +28,27 @@ export class Room17 extends Scene {
     this.addItem(new ItemBuilder(98, 78, 251, 175)
       .withTitle('glass_compartment')
       .clickable()
-      .withCallBack( {
-        if ItemManager.instance.getItem('generator').getValue == 'powered'
-            clearForeground
-            clearMiddleground
+      .withCallBack(() => {
+        if (ItemManager.getInstance().getItem('generator').value == 'powered') {
+          this.clearForeground();
+          this.clearMiddleground();
     
-            _pinkCrystal = Item.new(nil, nil, nil, nil)
-          .filename('pink_crystal.png')
-          .title('pink_crystal')
-            Inventory.instance.addToInventory(_pinkCrystal)
-            ItemManager.instance.getItem('glass_compartment').makeUnclickable
-            AudioManager.instance.play('open_compartment.ogg')
-          else
-            AudioManager.instance.play('touch_glass.ogg')
-          end
+            let pinkCrystal = new ItemBuilder(null, null, null, null)
+          .withImage('pink_crystal.png')
+          .withTitle('pink_crystal')
+          .build();
+          
+            Inventory.getInstance().addToInventory(pinkCrystal);
+            ItemManager.getInstance().getItem('glass_compartment').makeUnclickable();
+            AudioManager.getInstance().play('open_compartment.ogg');
+        } else {
+            AudioManager.getInstance().play('touch_glass.ogg');
+        }
 
 
-      });
+      })
+      .build()
+    );
 
     this.addAmbience('cave.ogg');
   }

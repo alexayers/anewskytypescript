@@ -2,6 +2,11 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import { AudioManager} from "../managers/audiomanager";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room21 extends Scene {
 
   constructor() {
@@ -33,21 +38,22 @@ export class Room21 extends Scene {
     this.addItem(new ItemBuilder(98, 61, 226, 279)
       .clickable()
       .withTitle('sailboat')
-      .withCallBack( {
+      .withCallBack(() => {
 
-        if Inventory.instance.isSelectedItem('parachute')
-        Inventory.instance.dropSelected
-        ItemManager.instance.getItem('sailboat').value('ready')
+        if (Inventory.getInstance().isSelectedItem('parachute')) {
+          Inventory.getInstance().dropSelected();
+          ItemManager.getInstance().getItem('sailboat').value = 'ready';
 
-        clearForeground
-        addForegroundImage('room21/room21_1fb.png')
-        addForegroundImage('room21/room21_2fb.png')
-        addForegroundImage('room21/room21_3fb.png')
-        addForegroundImage('room21/room21_2fb.png')
-        AudioManager.instance.play('sail.ogg')
-      end
+          this.clearForeground();
+          this.addForegroundImage('room21/room21_1fb.png');
+          this.addForegroundImage('room21/room21_2fb.png');
+          this.addForegroundImage('room21/room21_3fb.png');
+          this.addForegroundImage('room21/room21_2fb.png');
+          AudioManager.getInstance().play('sail.ogg');
+        }
 
       }
+    ).build()
     );
 
     this.addAmbience('waves.ogg');

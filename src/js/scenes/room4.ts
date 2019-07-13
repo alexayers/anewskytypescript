@@ -2,6 +2,9 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room4 extends Scene {
 
     constructor() {
@@ -41,21 +44,25 @@ export class Room4 extends Scene {
                     .clickable()
                     .withClickSound('pickup.ogg')
                     .withTitle('floor_keycard')
-                    .withCallBack( {
-          clearForeground
+                    .withCallBack(() => {
+          this.clearForeground();
           this.addForegroundImage('room4/room4_1fb.png')
           this.addForegroundImage('room4/room4_2fb.png')
           this.addForegroundImage('room4/room4_3fb.png')
     
     
-          _keycard = Item.new(nil, nil, nil, nil)
-                         .filename('keycard.png')
-                         .title('keycard')
-          Inventory.instance.addToInventory(_keycard)
-          ItemManager.instance.getItem('floor_keycard')
-              .makeUnclickable
+          let keycard = new ItemBuilder(null, null, null, null)
+                         .withImage('keycard.png')
+                         .withTitle('keycard')
+                         .build();
+
+          Inventory.getInstance().addToInventory(keycard)
+          ItemManager.getInstance().getItem('floor_keycard')
+              .makeUnclickable();
     
-        });
+        })
+        .build()
+        );
     
         this.addAmbience('wind.ogg');
     }

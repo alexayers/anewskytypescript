@@ -2,6 +2,9 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room27 extends Scene {
 
     constructor() {
@@ -24,18 +27,21 @@ export class Room27 extends Scene {
             .withTitle('bed_photo')
             .clickable()
             .withClickSound('pickup.ogg')
-            .withCallBack( {
-                clearBackground
-          addBackgroundImage('room27/room27_1bb.png')
+            .withCallBack(() => {
+                this.clearBackground();
+          this.addBackgroundImage('room27/room27_1bb.png')
     
-          _photo = Item.new(nil, nil, nil, nil)
-                    .filename('photo.png')
-                    .title('photo')
+          let photo = new ItemBuilder(null, null, null, null)
+                    .withImage('photo.png')
+                    .withTitle('photo')
+                    .build();
     
-          Inventory.instance.addToInventory(_photo)
-          ItemManager.instance.getItem('bed_photo')
-                    .makeUnclickable
-            });
+          Inventory.getInstance().addToInventory(photo);
+          ItemManager.getInstance().getItem('bed_photo')
+                    .makeUnclickable();
+            })
+            .build()
+        );
 
         this.addAmbience('bad_light.ogg');
     }

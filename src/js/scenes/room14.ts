@@ -2,6 +2,10 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import { AudioManager} from "../managers/audiomanager";
+
 export class Room14 extends Scene {
 
   constructor() {
@@ -20,21 +24,23 @@ export class Room14 extends Scene {
     this.addItem(new ItemBuilder(149, 234, 206, 312)
       .withTitle('grave')
       .clickable()
-      .withCallBack( {
-        if Inventory.instance.isSelectedItem('shovel')
-        Inventory.instance.dropSelected
-        clearMiddleground
-        addMiddlegroundImage('room14/room14_1mb.png')
-        AudioManager.instance.play('dig.ogg')
+      .withCallBack(() => {
+        if (Inventory.getInstance().isSelectedItem('shovel')) {
+        Inventory.getInstance().dropSelected();
+        this.clearMiddleground();
+        this.addMiddlegroundImage('room14/room14_1mb.png');
+        AudioManager.getInstance().play('dig.ogg');
 
-        _purpleCrystal = Item.new(nil, nil, nil, nil)
-          .filename('purple_crystal.png')
-          .title('purple_crystal')
-        Inventory.instance.addToInventory(_purpleCrystal)
-      end
+        let purpleCrystal = new ItemBuilder(null, null, null, null)
+          .withImage('purple_crystal.png')
+          .withTitle('purple_crystal')
+          .build();
+        Inventory.getInstance().addToInventory(purpleCrystal);
+        }
 
 
-      });
+      }).build()
+    );
 
     this.addAmbience('waves.ogg');
   }

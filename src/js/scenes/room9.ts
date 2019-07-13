@@ -2,6 +2,11 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import {Event} from "../event/event";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room9 extends Scene {
 
     constructor() {
@@ -31,46 +36,49 @@ export class Room9 extends Scene {
                     .clickable()
                     .withClickSound('rocks.ogg')
                     .withValue('')
-                    .withCallBack({
-          if Inventory.instance.isSelectedItem('purple_crystal')
-            ItemManager.instance.getItem('purple_pilar').value('fixed')
-            Inventory.instance.dropSelected
+                    .withCallBack( () => {
+          if (Inventory.getInstance().isSelectedItem('purple_crystal')) {
+            ItemManager.getInstance().getItem('purple_pilar').value = 'fixed';
+            Inventory.getInstance().dropSelected();
     
-            if ItemManager.instance.getItem('pink_pilar').getValue == 'fixed'
-              clearMiddleground
-              addMiddlegroundImage('room9/room9_1m_all.png')
-              addMiddlegroundImage('room9/room9_2m_all.png')
-              addMiddlegroundImage('room9/room9_3m_all.png')
-              EventBus.instance.publishEvent(Event.new('room30', 'updateMap'))
-            else
-              clearMiddleground
-              addMiddlegroundImage('room9/room9_1m_purple.png')
-            end
-          end
-        });
+            if (ItemManager.getInstance().getItem('pink_pilar').value == 'fixed') {
+              this.clearMiddleground();
+              this.addMiddlegroundImage('room9/room9_1m_all.png')
+              this.addMiddlegroundImage('room9/room9_2m_all.png')
+              this.addMiddlegroundImage('room9/room9_3m_all.png')
+              EventBus.getInstance().publish(new Event('room30', 'updateMap'))
+            } else {
+              this.clearMiddleground();
+              this.addMiddlegroundImage('room9/room9_1m_purple.png')
+            }
+          }
+        })
+        .build());
     
-        addItem(new ItemBuilder(197, 65, 247, 140)
+        this.addItem(new ItemBuilder(197, 65, 247, 140)
                     .withTitle('pink_pilar')
                     .clickable()
                     .withClickSound('rocks.ogg')
                     .withValue('')
-                    .withCallBack({
-          if Inventory.instance.isSelectedItem('pink_crystal')
-            ItemManager.instance.getItem('pink_pilar').value('fixed')
-            Inventory.instance.dropSelected
+                    .withCallBack(() => {
+          if (Inventory.getInstance().isSelectedItem('pink_crystal')) {
+            ItemManager.getInstance().getItem('pink_pilar').value = 'fixed';
+            Inventory.getInstance().dropSelected();
     
-            if ItemManager.instance.getItem('purple_pilar').getValue == 'fixed'
-              clearMiddleground
-              addMiddlegroundImage('room9/room9_1m_all.png')
-              addMiddlegroundImage('room9/room9_2m_all.png')
-              addMiddlegroundImage('room9/room9_3m_all.png')
-              EventBus.instance.publishEvent(Event.new('room30', 'updateMap'))
-            else
-              clearMiddleground
-              addMiddlegroundImage('room9/room9_1m_pink.png')
-            end
-          end
-        });
+            if (ItemManager.getInstance().getItem('purple_pilar').value == 'fixed') {
+              this.clearMiddleground();
+              this.addMiddlegroundImage('room9/room9_1m_all.png');
+              this.addMiddlegroundImage('room9/room9_2m_all.png');
+              this.addMiddlegroundImage('room9/room9_3m_all.png');
+              EventBus.getInstance().publish(new Event('room30', 'updateMap'));
+            } else {
+              this.clearMiddleground();
+              this.addMiddlegroundImage('room9/room9_1m_pink.png');
+            }
+          }
+        })
+        .build()
+        );
     
         this.addAmbience('wind.ogg');
     }

@@ -2,6 +2,12 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { EventBus} from "../event/eventbus";
+import { Event } from "../event/event";
+import { AudioManager} from "../managers/audiomanager";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room33 extends Scene {
 
   constructor() {
@@ -33,33 +39,37 @@ export class Room33 extends Scene {
     this.addItem(new ItemBuilder(41, 239, 84, 302)
       .clickable()
       .withTitle('navStorage')
-      .withCallBack( {
+      .withCallBack(() => {
 
-        if Inventory.instance.isSelectedItem('gpsDevice')
-            ItemManager.instance.getItem('navStorage').value('ready')
-            Inventory.instance.dropSelected
-            clearMiddleground
-            addMiddlegroundImage('room33/room33_1mb.png')
-            AudioManager.instance.play('good_code.ogg')
-          else
-            AudioManager.instance.play('bad_code.ogg')
-          end
+        if (Inventory.getInstance().isSelectedItem('gpsDevice')) {
+            ItemManager.getInstance().getItem('navStorage').value = 'ready';
+            Inventory.getInstance().dropSelected();
+            this.clearMiddleground();
+            this.addMiddlegroundImage('room33/room33_1mb.png');
+            AudioManager.getInstance().play('good_code.ogg');
+        } else {
+            AudioManager.getInstance().play('bad_code.ogg');
+        }
 
-      });
+      })
+      .build()
+    );
 
-    addItem(new ItemBuilder(234, 22, 290, 257)
+    this.addItem(new ItemBuilder(234, 22, 290, 257)
       .clickable()
-      .withCallBack( {
-        _navStorage = ItemManager.instance.getItem('navStorage')
-          _sailBoat = ItemManager.instance.getItem('sailboat')
+      .withCallBack(() => {
+        let navStorage = ItemManager.getInstance().getItem('navStorage');
+        let sailBoat = ItemManager.getInstance().getItem('sailboat');
     
-          if _navStorage.getValue == 'ready' &&
-          _sailBoat.getValue == 'ready'
-            EventBus.instance.publishEvent(Event.new('sceneManager', 'room34'))
-          end
+          if (navStorage.value == 'ready' &&
+            sailBoat.value == 'ready') {
+            EventBus.getInstance().publish(new Event('sceneManager', 'room34'));
+          }
 
 
-      });
+      })
+      .build()
+      );
 
 
     this.addAmbience('waves.ogg');

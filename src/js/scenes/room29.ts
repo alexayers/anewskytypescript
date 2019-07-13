@@ -2,6 +2,9 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+
 export class Room29 extends Scene {
 
     constructor() {
@@ -20,19 +23,22 @@ export class Room29 extends Scene {
                     .clickable()
                     .withTitle('trunk')
                     .withClickSound('remove_power.ogg')
-                    .withCallBack( {
-          clearMiddleground
-          _powercell = Item.new(nil, nil, nil, nil)
-                           .filename('power_cell.png')
-                           .title('power_cell')
+                    .withCallBack(() => {
+          this.clearMiddleground();
+          let powercell = new ItemBuilder(null, null, null, null)
+                           .withImage('power_cell.png')
+                           .withTitle('power_cell')
+                           .build();
     
-          Inventory.instance.addToInventory(_powercell)
-          ItemManager.instance.getItem('trunk')
+          Inventory.getInstance().addToInventory(powercell)
+          ItemManager.getInstance().getItem('trunk')
               .makeUnclickable
     
-        });
+        })
+        .build()
+        );
     
         this.addAmbience('spaceship.ogg');
-
+    }
 
 }
