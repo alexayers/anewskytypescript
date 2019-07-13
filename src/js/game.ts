@@ -55,8 +55,6 @@ export default class Game implements EventHandler {
 
 		this._sceneManager.render(this._ctx, this._canvas);
 
-		console.log(this._leftClick);
-
 		if (!Inventory.getInstance().isExaming() && this._leftClick) {
 			SceneManager.getInstance().processClick(this._mouseX, this._mouseY)
 		} else {
@@ -79,7 +77,8 @@ export default class Game implements EventHandler {
 
 		Inventory.getInstance().render(this._ctx, this._canvas);
 
-
+		this._leftClick = false;
+		this._rightClick = false;
 	}
 
 	public handleEvent(event: Event): void {

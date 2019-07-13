@@ -32,7 +32,7 @@ export class Room29 extends Scene {
     
           Inventory.getInstance().addToInventory(powercell)
           ItemManager.getInstance().getItem('trunk')
-              .makeUnclickable
+              .makeUnclickable();
     
         })
         .build()

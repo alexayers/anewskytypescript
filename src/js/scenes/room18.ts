@@ -42,7 +42,7 @@ export class Room18 extends Scene {
                     .withTitle('shovel')
                     .build();
 
-      Inventory.getInstance().addToInventory(shovel)
+      Inventory.getInstance().addToInventory(shovel);
       ItemManager.getInstance().getItem('room_shovel')
                     .makeUnclickable();
 

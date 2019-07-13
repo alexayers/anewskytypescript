@@ -91,17 +91,16 @@ export class Scene implements EventHandler {
         this._items.forEach(function (item) {
 
             if (item.isPointWithItem(x, y)) {
+                console.log("Point in item");
                 return;
             }
 
         });
 
         this._doors.forEach(function (door) {
-
             if (door.isPointWithinDoor(x, y)) {
-                
+                console.log("point is door");
             }
-
         });
 
         if (this._clickCallBack != null) {
@@ -119,6 +118,10 @@ export class Scene implements EventHandler {
         if (this._middleground.getTotalFrames() > 0) {
             this._middleground.render(renderContext, canvas);
         }
+
+        this._items.forEach(function (item) {
+            item.render();
+        });
 
         if (this._foreground.getTotalFrames() > 0) {
             this._foreground.render(renderContext, canvas);

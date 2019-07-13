@@ -31,10 +31,13 @@ export class Item extends ClickBox implements EventHandler {
         this._image = itemBuilder.image;
     }
 
-    public render(renderContext: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void {
+    public render(): void {
 
+        let canvas = <HTMLCanvasElement>document.getElementById('canvas');
+		let ctx = canvas.getContext("2d");
+ 
         if (this._image != null && this._onScreen) {
-            renderContext.drawImage(this._image, this._lx, this._ly);
+            ctx.drawImage(this._image, this._lx, this._ly, 96, 96);
         }
 
     }
@@ -110,6 +113,17 @@ export class ItemBuilder {
         this._ly = ly;
         this._hx = hx;
         this._hy = hy;
+        this._onScreen = false;
+        this._title = null; 
+        this._clickSound = null;
+        this._imageExamine= null;
+        this._value = null;
+        this._canGrab= false;
+        this._onScreen= false;
+        this._canClick= false;
+        this._canExamine= false;
+        this._callBack = null;
+        this._image = null;
     }
 
     public withImage(filename: string): ItemBuilder {

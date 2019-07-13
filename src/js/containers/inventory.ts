@@ -37,7 +37,7 @@ export class Inventory {
         this._slots.forEach(function (item) {
 
             if (item != null) {
-                item.render(renderContext, canvas);
+                item.render();
 
                 if (idx == this._selectedIdx) {
                     renderContext.drawImage(this._highlight, offset, 32);

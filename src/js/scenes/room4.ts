@@ -46,9 +46,9 @@ export class Room4 extends Scene {
                     .withTitle('floor_keycard')
                     .withCallBack(() => {
           this.clearForeground();
-          this.addForegroundImage('room4/room4_1fb.png')
-          this.addForegroundImage('room4/room4_2fb.png')
-          this.addForegroundImage('room4/room4_3fb.png')
+          this.addForegroundImage('room4/room4_1fb.png');
+          this.addForegroundImage('room4/room4_2fb.png');
+          this.addForegroundImage('room4/room4_3fb.png');
     
     
           let keycard = new ItemBuilder(null, null, null, null)
@@ -56,7 +56,7 @@ export class Room4 extends Scene {
                          .withTitle('keycard')
                          .build();
 
-          Inventory.getInstance().addToInventory(keycard)
+          Inventory.getInstance().addToInventory(keycard);
           ItemManager.getInstance().getItem('floor_keycard')
               .makeUnclickable();
     

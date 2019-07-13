@@ -19,7 +19,7 @@ export class Room8 extends Scene {
         this.addDoor(new DoorBuilder(0, 0, 63, 350)
             .withDestination('room7')
             .withWalkSound('walk_sand.ogg')
-            .build())
+            .build());
         this.addDoor(new DoorBuilder(281, 0, 350, 350)
             .withDestination('room9')
             .withWalkSound('walk_sand.ogg')

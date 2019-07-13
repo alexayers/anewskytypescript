@@ -56,9 +56,10 @@ export class Door extends ClickBox implements EventHandler {
             EventBus
                 .getInstance()
                 .publish(new Event('sceneManager', this._destination));
-
+                console.log("a door");
             return true;
         } else {
+            console.log("Not a door");
             false;
         }
     }
