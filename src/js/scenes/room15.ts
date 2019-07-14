@@ -15,17 +15,17 @@ export class Room15 extends Scene {
         this.addForegroundImage('room15/room15_1f.png');
 
 
-        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+        this.addDoor(new DoorBuilder(0,274,41,800)
             .withDestination('room24')
             .withWalkSound('walk_sand.ogg')
             .build()
         );
-        this.addDoor(new DoorBuilder(315, 0, 350, 350)
+        this.addDoor(new DoorBuilder(369,273,399,800)
             .withDestination('room16')
             .withWalkSound('walk_sand.ogg')
             .build()
         );
-        this.addDoor(new DoorBuilder(84, 98, 267, 258)
+        this.addDoor(new DoorBuilder(97,409,255,659)
             .withDestination('room13')
             .withWalkSound('walk_sand.ogg')
             .build()

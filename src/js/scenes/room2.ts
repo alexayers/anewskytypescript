@@ -11,16 +11,17 @@ export class Room2 extends Scene {
 
         this.addAmbience('bad_light.ogg')
 
-        this.addDoor(new DoorBuilder(298, 0, 350, 350)
+        this.addDoor(new DoorBuilder(276,273,399,539)
                 .withDestination('room1')
                 .withWalkSound('walk_building.ogg')
                 .build()
     )
 
-    this.addDoor(new DoorBuilder(0, 0, 50, 333)
+    this.addDoor(new DoorBuilder(1,274,41,800)
                 .withDestination('room3')
                 .withWalkSound('walk_building.ogg')
                 .requiresKey('key')
+                .lock()
                 .withClickSound('key_locked.ogg')
                 .build()
     )

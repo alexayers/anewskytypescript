@@ -22,10 +22,35 @@ export default class Game implements EventHandler {
 		this._canvas = <HTMLCanvasElement>document.getElementById('canvas');
 		this._canvas.width = this._width;
 		this._canvas.height = this._height;
-		this._canvas.addEventListener("mousedown", this.mouseDown, false);
+		this._canvas.addEventListener("mousedown", (mouseEvent) => {
+
+			if (mouseEvent.button == 0) {
+				this._leftClick = true;
+				this._rightClick = false;
+			} else if (mouseEvent.button == 2) {
+				this._leftClick = false;
+				this._rightClick = true;
+			}
+
+		
+			this._mouseX = mouseEvent.clientX - this._canvas.offsetLeft;
+			this._mouseY = ((mouseEvent.clientY - this._canvas.offsetTop) - 800) * -1;
+
+			console.log("Clicked x=" + this._mouseX + " y= " + this._mouseY);
+		}, false);
+
+		this._canvas.addEventListener("mousemove", (mouseEvent) => {
+
+			this._mouseX = mouseEvent.clientX - this._canvas.offsetLeft;
+			this._mouseY = ((mouseEvent.clientY - this._canvas.offsetTop) - 800) * -1;
+
+			
+
+		}, false);
+
 		this._ctx = this._canvas.getContext("2d");
 		this._ctx.imageSmoothingEnabled = false;
-
+		
 
 		this._rightClick = false;
 		this._leftClick = false;
@@ -41,18 +66,9 @@ export default class Game implements EventHandler {
 		console.log("Game initialized!")
 	}
 
-	private mouseDown(event: MouseEvent): void {
-
-		EventBus.getInstance().publish(
-			new Event("game", event)
-		);
-
-		
-
-	}
-
 	public render(): void {
 
+		this._ctx.clearRect(0,0,this._canvas.width, this._canvas.height);
 		this._sceneManager.render(this._ctx, this._canvas);
 
 		if (!Inventory.getInstance().isExaming() && this._leftClick) {
@@ -77,7 +93,9 @@ export default class Game implements EventHandler {
 
 		Inventory.getInstance().render(this._ctx, this._canvas);
 
-		
+		this._ctx.fillStyle = "#ffffff";
+		this._ctx.font = "40px Times New Roman";
+		this._ctx.fillText("x:" + this._mouseX + " y:" + this._mouseY, 50, 50);
 
 		this._leftClick = false;
 		this._rightClick = false;
@@ -85,22 +103,7 @@ export default class Game implements EventHandler {
 
 	public handleEvent(event: Event): void {
 
-		let mouseEvent = event.payload;
-
-		if (mouseEvent.button == 0) {
-			this._leftClick = true;
-			this._rightClick = false;
-		} else if (mouseEvent.button == 2) {
-			this._leftClick = false;
-			this._rightClick = true;
-		}
-
 		
-		let canvas = <HTMLCanvasElement>document.getElementById('canvas');
-		this._mouseX = mouseEvent.clientX - canvas.offsetLeft;
-		this._mouseY = ((mouseEvent.clientY - canvas.offsetTop) - 800) * -1;
-
-		console.log("Clicked x=" + this._mouseX + " y= " + this._mouseY);
 	}
 
 }

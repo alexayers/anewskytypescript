@@ -9,7 +9,7 @@ export class Room24 extends Scene {
         super();
 
         this.addBackgroundImage('room24/room24_1b.png');
-        this.addDoor(new DoorBuilder(315, 0, 350, 350)
+        this.addDoor(new DoorBuilder(369,273,399,800)
             .withDestination('room15')
             .withWalkSound('walk_sand.ogg')
             .build()

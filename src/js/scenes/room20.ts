@@ -9,19 +9,19 @@ export class Room20 extends Scene {
 
         this.addBackgroundImage('room20/room20.png');
 
-        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+        this.addDoor(new DoorBuilder(0,274,41,800)
             .withDestination('room21')
             .withWalkSound('walk_sand.ogg')
             .build()
         );
 
-        this.addDoor(new DoorBuilder(281, 0, 350, 350)
+        this.addDoor(new DoorBuilder(369,273,399,800)
             .withDestination('room12')
             .withWalkSound('walk_sand.ogg')
             .build()
         );
 
-        this.addDoor(new DoorBuilder(129, 0, 215, 260)
+        this.addDoor(new DoorBuilder(154,417,249,798)
             .withDestination('room7')
             .withWalkSound('walk_ladder.ogg')
             .build()

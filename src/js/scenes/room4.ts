@@ -22,12 +22,12 @@ export class Room4 extends Scene {
         this.addForegroundImage('room4/room4_2f.png');
         this.addForegroundImage('room4/room4_3f.png');
     
-        this.addDoor(new DoorBuilder(0, 0, 44, 350)
+        this.addDoor(new DoorBuilder(0,274,41,800)
                     .withDestination('room5')
                     .withWalkSound('walk_sand.ogg')
                     .build()
         );
-        this.addDoor(new DoorBuilder(289, 0, 350, 350)
+        this.addDoor(new DoorBuilder(369,273,399,800)
                     .withDestination('room6')
                     .withWalkSound('walk_sand.ogg')
                     .build()
@@ -40,7 +40,7 @@ export class Room4 extends Scene {
         );
     
     
-        this.addItem(new ItemBuilder(87, 295, 120, 317)
+        this.addItem(new ItemBuilder(100,321,137,352)
                     .clickable()
                     .withClickSound('pickup.ogg')
                     .withTitle('floor_keycard')

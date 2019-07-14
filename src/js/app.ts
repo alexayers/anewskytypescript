@@ -21,6 +21,7 @@ class App {
 		requestAnimationFrame(this.gameLoop.bind(this));
 
 		this._game.render();
+		
 	}
 }
 

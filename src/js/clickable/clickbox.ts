@@ -6,6 +6,8 @@ export class ClickBox {
     protected _ly : number;
     protected _hx : number;
     protected _hy : number;
+
+
     protected _title: string;
     protected _clickSound: string;
 

@@ -20,15 +20,17 @@ export class Room33 extends Scene {
     this.addMiddlegroundImage('room33/room33_1m.png');
 
 
-    this.addDoor(new DoorBuilder(0, 0, 23, 201)
+    this.addDoor(new DoorBuilder(0,274,41,800)
       .withDestination('room21')
       .withWalkSound('walk_sand.ogg')
       .build()
     );
+    
     this.addDoor(new DoorBuilder(322, 0, 350, 35)
       .withDestination('room21')
       .withWalkSound('walk_sand.ogg')
       .build());
+
     this.addDoor(new DoorBuilder(0, 307, 350, 350)
       .withDestination('room21')
       .withWalkSound('walk_sand.ogg')

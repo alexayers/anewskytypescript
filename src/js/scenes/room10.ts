@@ -24,13 +24,13 @@ export class Room10 extends Scene {
         this.addForegroundImage('room10/room10_3f.png');
         this.addForegroundImage('room10/room10_4f.png');
 
-        this.addDoor(new DoorBuilder(0, 0, 63, 350)
+        this.addDoor(new DoorBuilder(0,274,41,800)
             .withDestination('room9')
             .withWalkSound('walk_sand.ogg')
             .build()
         );
 
-        this.addItem(new ItemBuilder(219, 66, 297, 281)
+        this.addItem(new ItemBuilder(250,395,323,716)
             .clickable()
             .withTitle('parachute')
             .withClickSound('sail.ogg')

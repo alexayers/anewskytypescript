@@ -13,12 +13,12 @@ export class Room31 extends Scene {
         this.addBackgroundImage('room31/room31_1b.png');
 
 
-        this.addDoor(new DoorBuilder(0, 0, 350, 130)
+        this.addDoor(new DoorBuilder(0, 279, 400, 371)
                     .withDestination('room3')
                     .withWalkSound('open_toolbox.ogg')
                     .build()
         );
-        this.addDoor(new DoorBuilder(0, 239, 350, 350)
+        this.addDoor(new DoorBuilder(0,707,400,800)
                     .withDestination('room3')
                     .withWalkSound('open_toolbox.ogg')
                     .build()
@@ -26,7 +26,7 @@ export class Room31 extends Scene {
     
         this.addAmbience('bad_light.ogg');
     
-        this.addItem(new ItemBuilder(128, 144, 294, 210)
+        this.addItem(new ItemBuilder(148,477,335,568)
                     .clickable()
                     .withClickSound('pickup.ogg')
                     .withTitle('toolbox')

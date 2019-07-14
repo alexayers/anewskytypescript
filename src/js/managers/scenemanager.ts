@@ -93,7 +93,7 @@ export class SceneManager implements EventHandler {
         this.registerScene("room34", new Room34());
 
 
-        this._currentScene = "begin";
+        this._currentScene = "room4";
         EventBus.getInstance().register("sceneManager", this);
 
     }

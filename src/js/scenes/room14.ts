@@ -15,7 +15,7 @@ export class Room14 extends Scene {
     this.addMiddlegroundImage('room14/room14_1m.png');
 
 
-    this.addDoor(new DoorBuilder(0, 0, 63, 350)
+    this.addDoor(new DoorBuilder(0,274,41,800)
       .withDestination('room13')
       .withWalkSound('walk_sand.ogg')
       .build()

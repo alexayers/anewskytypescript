@@ -14,6 +14,8 @@ export class Item extends ClickBox implements EventHandler {
     private _canExamine: boolean;
     private _callBack: Function;
     private _image: HTMLImageElement;
+    private _renderOffsetX : number;
+    private _renderOffsetY: number;
 
     constructor(itemBuilder: ItemBuilder) {
         super(itemBuilder.lx,
@@ -31,6 +33,8 @@ export class Item extends ClickBox implements EventHandler {
         this._canExamine = itemBuilder.canExamine;
         this._callBack = itemBuilder.callBack;
         this._image = itemBuilder.image;
+        this._renderOffsetX = itemBuilder.renderOffsetX;
+        this._renderOffsetY = itemBuilder.renderOffsetY;
     }
 
     public render(): void {
@@ -39,7 +43,7 @@ export class Item extends ClickBox implements EventHandler {
 		let ctx = canvas.getContext("2d");
  
         if (this._image != null && this._onScreen) {
-            ctx.drawImage(this._image, this._lx, this._ly, 96, 96);
+            ctx.drawImage(this._image, this._renderOffsetX, this._renderOffsetY, 96, 96);
         }
 
     }
@@ -87,6 +91,16 @@ export class Item extends ClickBox implements EventHandler {
         return this._value;
     }
 
+    get renderOffsetX() : number {
+        return this._renderOffsetX;
+    }
+
+
+    get renderOffsetY() : number {
+        return this._renderOffsetY;
+    }
+
+
     set value(value:string)  {
         this._value = value;
     }
@@ -112,6 +126,8 @@ export class ItemBuilder {
     private _canExamine: boolean;
     private _callBack: Function;
     private _image: HTMLImageElement;
+    private _renderOffsetX : number;
+    private _renderOffsetY: number;
 
 
     constructor(lx: number, ly: number, hx: number, hy: number) {
@@ -130,6 +146,8 @@ export class ItemBuilder {
         this._canExamine= false;
         this._callBack = null;
         this._image = null;
+        this._renderOffsetX = null;
+        this._renderOffsetY = null;
     }
 
     public withImage(filename: string): ItemBuilder {
@@ -143,6 +161,16 @@ export class ItemBuilder {
         return this;
     }
 
+    public withRenderOffsetX(renderOffsetX: number) : ItemBuilder {
+        this._renderOffsetX = renderOffsetX;
+        return this;
+    }
+
+    public withRenderOffsetY(renderOffsetY: number) : ItemBuilder {
+        this._renderOffsetY = renderOffsetY;
+        return this;
+    }
+ 
     public withClickSound(clickSound: string): ItemBuilder {
         this._clickSound = clickSound;
         return this;
@@ -243,5 +271,12 @@ export class ItemBuilder {
         return this._callBack;
     }
 
+    get renderOffsetX() : number {
+        return this._renderOffsetX;
+    }
+
+    get renderOffsetY() : number {
+        return this._renderOffsetY;
+    }
 
 }

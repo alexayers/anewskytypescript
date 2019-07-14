@@ -21,14 +21,14 @@ export class Room1 extends Scene {
         this.addForegroundImage('room1/room1_3f.png');
 
         this.addDoor(
-            new DoorBuilder(0, 0, 42, 348)
+            new DoorBuilder(1,274,41,800)
                 .withDestination("room2")
                 .withWalkSound("walk_building")
                 .build()
         );
 
         this.addDoor(
-            new DoorBuilder(77, 142, 161, 269)
+            new DoorBuilder(91, 387 , 187 , 582)
             .withDestination('room4')
             .withWalkSound('walk_building')
             .lock()
@@ -37,7 +37,9 @@ export class Room1 extends Scene {
         );
 
         this.addItem(
-            new ItemBuilder(116, 280, 148, 312)
+            new ItemBuilder(128,334,155,355)
+            .withRenderOffsetX(400)
+            .withRenderOffsetY(600)
             .withTitle('key')
             .withImage('key.png')
             .grabble()
@@ -47,7 +49,7 @@ export class Room1 extends Scene {
         );
 
         this.addItem(
-            new ItemBuilder(167, 150, 185, 172)
+            new ItemBuilder(189,469,212,500)
             .withTitle('broken_cardreader')
             .clickable()
             .withValue('broken')

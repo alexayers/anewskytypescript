@@ -19,7 +19,7 @@ export class Room5 extends Scene {
         this.addMiddlegroundImage('room5/room5_1m.png');
         this.addMiddlegroundImage('room5/room5_2m.png');
     
-        this.addDoor(new DoorBuilder(154, 131, 247, 267)
+        this.addDoor(new DoorBuilder(179,391,287,599)
                     .withDestination('room18')
                     .withWalkSound('slide_door.ogg')
                     .lock()
@@ -27,14 +27,14 @@ export class Room5 extends Scene {
                     .build()
         );
 
-        this.addDoor(new DoorBuilder(306, 0, 350, 350)
+        this.addDoor(new DoorBuilder(369,273,399,8009)
                     .withDestination('room4')
                     .withWalkSound('walk_sand.ogg')
                     .build()
         );
     
     
-        this.addItem(new ItemBuilder(270, 183, 302, 230)
+        this.addItem(new ItemBuilder(302,469,350,518)
                     .withTitle('keyreader')
                     .clickable()
                     .withCallBack(() =>  {
