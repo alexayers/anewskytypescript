@@ -3,6 +3,13 @@ import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
 
+import { Inventory} from "../containers/inventory";
+import { ItemManager} from "../managers/itemmanager";
+import { AudioManager} from "../managers/audiomanager";
+
+import {EventBus} from "../event/eventbus";
+import {Event} from "../event/event";
+
 export class Room1 extends Scene {
 
     constructor() {
@@ -38,6 +45,28 @@ export class Room1 extends Scene {
             .viewable()
             .build()
         );
+
+        this.addItem(
+            new ItemBuilder(167, 150, 185, 172)
+            .withTitle('broken_cardreader')
+            .clickable()
+            .withValue('broken')
+            .withCallBack(() =>  {
+                if (Inventory.getInstance().isSelectedItem('hammer') &&
+                    ItemManager.getInstance().getItem('broken_cardreader').value == 'broken') {
+                    ItemManager.getInstance().getItem('broken_cardreader').value = 'fixed';
+                    Inventory.getInstance().dropSelected();
+                    this.clearBackground();
+                    this.addBackgroundImage('room1/room1_1bb.png');
+                    EventBus.getInstance().publish(new Event('broken_door', 'unlock'));
+                    AudioManager.getInstance().play('break_door.ogg');
+                } else {
+                    AudioManager.getInstance().play('bad_code.ogg');
+                }
+            })
+            .build()
+        );
+
     }
 
 

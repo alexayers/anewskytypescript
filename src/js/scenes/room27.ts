@@ -23,22 +23,21 @@ export class Room27 extends Scene {
             .build()
         );
 
-        this.addItem(new ItemBuilder(66, 180, 140, 215)
+        this.addItem(new ItemBuilder(77, 470, 160, 518)
             .withTitle('bed_photo')
             .clickable()
             .withClickSound('pickup.ogg')
             .withCallBack(() => {
                 this.clearBackground();
-          this.addBackgroundImage('room27/room27_1bb.png')
+                this.addBackgroundImage('room27/room27_1bb.png')
     
-          let photo = new ItemBuilder(null, null, null, null)
-                    .withImage('photo.png')
-                    .withTitle('photo')
-                    .build();
-    
-          Inventory.getInstance().addToInventory(photo);
-          ItemManager.getInstance().getItem('bed_photo')
-                    .makeUnclickable();
+                let photo = new ItemBuilder(null, null, null, null)
+                            .withImage('photo.png')
+                            .withTitle('photo')
+                            .build();
+            
+                Inventory.getInstance().addToInventory(photo);
+                ItemManager.getInstance().getItem('bed_photo').makeUnclickable();
             })
             .build()
         );

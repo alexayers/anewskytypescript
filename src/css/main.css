@@ -16,7 +16,7 @@ canvas {
     margin-right: auto;
     display: block;
     -webkit-tap-highlight-color: transparent;
-    background-color: rgb(255, 0, 0);
-    width: 350px;
-    height: 400px;
+    background-color: #111111;
+    width: 400px;
+    height: 600px;
 }

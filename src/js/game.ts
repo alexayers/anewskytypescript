@@ -95,9 +95,10 @@ export default class Game implements EventHandler {
 			this._rightClick = true;
 		}
 
+		
 		let canvas = <HTMLCanvasElement>document.getElementById('canvas');
 		this._mouseX = mouseEvent.clientX - canvas.offsetLeft;
-		this._mouseY = ((mouseEvent.clientY - canvas.offsetTop) - 400) * -1;
+		this._mouseY = ((mouseEvent.clientY - canvas.offsetTop) - 800) * -1;
 
 		console.log("Clicked x=" + this._mouseX + " y= " + this._mouseY);
 	}

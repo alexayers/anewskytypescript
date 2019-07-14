@@ -4,6 +4,7 @@ import { ItemBuilder } from "../clickable/item";
 
 import { Inventory} from "../containers/inventory";
 import { EventBus} from "../event/eventbus";
+import { Event} from "../event/event";
 import { AudioManager} from "../managers/audiomanager";
 import { ItemManager} from "../managers/itemmanager";
 
@@ -89,5 +90,8 @@ export class Room25 extends Scene {
     this.addAmbience('maproom.ogg');
   }
 
+  public handleEvent(event: Event): void {
+      this.addForegroundImage('room25/room25_1f_map.png');
+  }
 
 }

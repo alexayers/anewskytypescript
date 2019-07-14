@@ -54,15 +54,15 @@ export class Room30 extends Scene {
                         ItemManager.getInstance().getItem('pink_pilar').value == 'fixed' &&
                         ItemManager.getInstance().getItem('purple_pilar').value == 'fixed') {
 
-                        ItemManager.getInstance().getItem('mapPadEnter').value = 'ready';
+                            ItemManager.getInstance().getItem('mapPadEnter').value = 'ready';
 
-                        EventBus.getInstance().publish(new Event('room25', 'ready'));
-                        this.clearBackground();
-                        this.addBackgroundImage('room30/room30_1bd.png');
-                        AudioManager.getInstance().play('good_code.ogg');
+                            EventBus.getInstance().publish(new Event('room25', 'ready'));
+                            this.clearBackground();
+                            this.addBackgroundImage('room30/room30_1bd.png');
+                            AudioManager.getInstance().play('good_code.ogg');
                         } else {
-                        ItemManager.getInstance().getItem('mapPadEnter').value = '';
-                        AudioManager.getInstance().play('bad_code.ogg');
+                            ItemManager.getInstance().getItem('mapPadEnter').value = '';
+                            AudioManager.getInstance().play('bad_code.ogg');
                         }
                     })
                     .build()
@@ -70,4 +70,11 @@ export class Room30 extends Scene {
 
          this.addAmbience('maproom.ogg');
     }
+
+    public handleEvent(event: Event): void {
+        this.clearBackground();
+        this.addBackgroundImage('room30/room30_1bb.png');
+        this.addBackgroundImage('room30/room30_1bc.png');
+    }
+
 }

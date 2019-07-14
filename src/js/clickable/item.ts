@@ -71,6 +71,10 @@ export class Item extends ClickBox implements EventHandler {
 
     }
 
+    get image(): HTMLImageElement {
+        return this._image;
+    }
+ 
     public makeUnclickable() : void {
         this._canClick = false;
     }

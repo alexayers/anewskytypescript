@@ -1,6 +1,7 @@
 import { Scene } from "../containers/scene";
 import { DoorBuilder } from "../clickable/door";
 import { ItemBuilder } from "../clickable/item";
+import { Event} from "../event/event";
 
 export class Room12 extends Scene {
 
@@ -39,5 +40,12 @@ export class Room12 extends Scene {
         this.addAmbience('waves.ogg');
     }
 
+    public handleEvent(event: Event): void {
+        this.clearBackground();
+        this.addBackgroundImage('room12/room12_1bb.png');
+        this.addBackgroundImage('room12/room12_2bb.png');
+        this.addBackgroundImage('room12/room12_3bb.png');
+        this.addBackgroundImage('room12/room12_4bb.png');
+    }
 
 }

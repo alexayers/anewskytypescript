@@ -26,23 +26,21 @@ export class Room31 extends Scene {
     
         this.addAmbience('bad_light.ogg');
     
-        this.addItem(new ItemBuilder(128, 164, 294, 230)
+        this.addItem(new ItemBuilder(128, 144, 294, 210)
                     .clickable()
                     .withClickSound('pickup.ogg')
                     .withTitle('toolbox')
                     .withCallBack(() => {
-          this.clearBackground();
-          this.addBackgroundImage('room31/room31_1bb.png')
-          let hammer = new ItemBuilder(null, null, null, null)
-                        .withImage('hammer.png')
-                        .withTitle('hammer')
-                        .build();
+                        this.clearBackground();
+                        this.addBackgroundImage('room31/room31_1bb.png')
+                        let hammer = new ItemBuilder(null, null, null, null)
+                                        .withImage('hammer.png')
+                                        .withTitle('hammer')
+                                        .build();
 
-          Inventory.getInstance().addToInventory(hammer)
-          ItemManager.getInstance().getItem('toolbox')
-              .makeUnclickable();
-    
-        })
+                        Inventory.getInstance().addToInventory(hammer);
+                        ItemManager.getInstance().getItem('toolbox').makeUnclickable();
+                    })
         .build()
         );
     }

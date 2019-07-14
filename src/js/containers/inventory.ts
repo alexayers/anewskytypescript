@@ -12,41 +12,51 @@ export class Inventory {
 
 
     private constructor() {
-        this._slots = new Array(6);
-        this._isExamining = false;
-        this._selectedIdx = -1;
-        this._xOffset = 30;
-        this._yOffset = 360;
-
-        this._highlight = new Image();
-        this._highlight.src = "assets/images/objects/highlight.png";
+        
     }
 
     public static getInstance() {
         if (!Inventory._instance) {
             Inventory._instance = new Inventory();
+            Inventory._instance.init();
         }
 
         return Inventory._instance;
+    }
+
+    private init() : void {
+        this._isExamining = false;
+        this._selectedIdx = -1;
+        this._xOffset = 30;
+        this._yOffset = 360;
+
+        this._slots = new Array();
+
+            for (let i = 0; i < 6; i++) {
+                this._slots[i] = null;
+            }
+
+        this._highlight = new Image();
+        this._highlight.src = "assets/images/objects/highlight.png";
     }
 
     public render(renderContext: CanvasRenderingContext2D, canvas: HTMLCanvasElement): void {
         let idx = 0;
         let offset = 10;
 
-        this._slots.forEach(function (item) {
+        this._slots.forEach((item) => {
 
             if (item != null) {
-                item.render();
+                renderContext.drawImage(item.image, offset, 755,256,96);
 
                 if (idx == this._selectedIdx) {
-                    renderContext.drawImage(this._highlight, offset, 32);
+                    renderContext.drawImage(this._highlight, offset, 755,256,96);
                 }
 
             }
 
             idx++;
-            offset += 32;
+            offset += 260;
 
         });
 
@@ -56,13 +66,13 @@ export class Inventory {
         let idx = 0;
         let offset = 10;
 
-        this._slots.forEach(function (item) {
+        this._slots.forEach((item) => {
 
             if (item != null) {
                 if (x >= offset &&
-                    x <= offset + 32 &&
-                    y >= 360 &&
-                    y <= 400) {
+                    x <= offset + 260 &&
+                    y >= 200 &&
+                    y <= 268) {
 
                     if (isLeftClick) {
                         this._isExamining = false;
@@ -80,7 +90,7 @@ export class Inventory {
             }
 
             idx++;
-            offset += 32;
+            offset += 260;
 
         });
     }
@@ -120,15 +130,17 @@ export class Inventory {
 
         var idx = 0;
 
-        this._slots.forEach(function (item) {
+        this._slots.forEach((item) => {
             if (item == null) {
+                console.log("Placed item into inventory ->" + itemToAdd.title);
                 this._slots[idx] = itemToAdd;
                 return;
             }
-
+            
             idx++;
         });
 
+        
 
     }
 }

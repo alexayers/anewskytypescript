@@ -33,7 +33,7 @@ export class AnimatedFrame {
             0,
             0,
             canvas.width,
-            canvas.height
+            750
         );
 
         this._tick++;
