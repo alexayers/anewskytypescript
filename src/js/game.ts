@@ -77,6 +77,8 @@ export default class Game implements EventHandler {
 
 		Inventory.getInstance().render(this._ctx, this._canvas);
 
+		
+
 		this._leftClick = false;
 		this._rightClick = false;
 	}

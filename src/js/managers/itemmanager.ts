@@ -21,6 +21,7 @@ export class ItemManager {
     }
 
     public register(item:Item): void {
+        console.log({item});
         this._items.set(item.title, item);
     }
 

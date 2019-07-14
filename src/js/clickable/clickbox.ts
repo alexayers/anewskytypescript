@@ -49,10 +49,11 @@ export class ClickBox {
     }
 
     public isPointInSquare(x: number, y : number) : boolean {
+
         if (x >= this._lx &&
             x <= this._hx &&
             y >= this._ly &&
-            y <= this._hx) {
+            y <= this._hy) {
                 return true;
             } else {
                 return false;

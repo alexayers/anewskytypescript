@@ -19,7 +19,7 @@ export class EventBus {
 
     public register(channel: string, eventhandler: EventHandler): void {
         if (!this._channels.has(channel)) {
-            console.log("Creating new channel ->" + channel);
+            //console.log("Creating new channel ->" + channel);
             this._channels.set(channel, new Array());
         }
 
@@ -27,7 +27,6 @@ export class EventBus {
     }
 
     public publish(event: Event) {
-        console.log("Got event ->" + event.channel);
 
         if (this._channels.has(event.channel)) {
             let listeners = this._channels.get(event.channel);
@@ -38,9 +37,6 @@ export class EventBus {
         } else {
             console.log("No listeners registered for channel -> " + event.channel);
         }
-
-
-
     }
 }
 

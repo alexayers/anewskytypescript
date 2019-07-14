@@ -21,6 +21,8 @@ export class Item extends ClickBox implements EventHandler {
             itemBuilder.hx,
             itemBuilder.hy);
 
+        this._title = itemBuilder.title;   
+        this._clickSound = itemBuilder.clickSound;
         this._imageExamine = itemBuilder.imageExamine;
         this._value = itemBuilder.value;
         this._canGrab = itemBuilder.canGrab;

@@ -6,6 +6,7 @@ import { EventBus, EventHandler } from "../event/eventbus";
 import { Event } from "../event/event";
 import { AudioManager } from "../managers/audiomanager";
 import { Inventory } from "../containers/inventory";
+import { ItemManager } from "../managers/itemmanager";
 
 export class Scene implements EventHandler {
     private _background: AnimatedFrame;
@@ -67,9 +68,9 @@ export class Scene implements EventHandler {
     }
 
     public addItem(item: Item): void {
-        EventBus
+        ItemManager
             .getInstance()
-            .register(item.title, item);
+            .register(item);
 
         this._items.push(item);
     }
@@ -98,9 +99,7 @@ export class Scene implements EventHandler {
         });
 
         this._doors.forEach(function (door) {
-            if (door.isPointWithinDoor(x, y)) {
-                console.log("point is door");
-            }
+            door.isPointWithinDoor(x, y);
         });
 
         if (this._clickCallBack != null) {
@@ -126,6 +125,8 @@ export class Scene implements EventHandler {
         if (this._foreground.getTotalFrames() > 0) {
             this._foreground.render(renderContext, canvas);
         }
+
+      
 
     }
 

@@ -93,7 +93,7 @@ export class SceneManager implements EventHandler {
         this.registerScene("room34", new Room34());
 
 
-        this._currentScene = "room30";
+        this._currentScene = "begin";
         EventBus.getInstance().register("sceneManager", this);
 
     }
@@ -119,6 +119,6 @@ export class SceneManager implements EventHandler {
         }
 
         this._currentScene = event.payload;
-        console.log("Moving to room -> " + event.payload);
+       // console.log("Moving to room -> " + event.payload);
     }
 }
