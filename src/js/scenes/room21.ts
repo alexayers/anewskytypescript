@@ -35,7 +35,7 @@ export class Room21 extends Scene {
       .build()
     );
 
-    this.addItem(new ItemBuilder(98, 61, 226, 279)
+    this.addItem(new ItemBuilder(176,372,345,800)
       .clickable()
       .withTitle('sailboat')
       .withCallBack(() => {

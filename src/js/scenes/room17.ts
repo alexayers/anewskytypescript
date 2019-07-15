@@ -25,7 +25,7 @@ export class Room17 extends Scene {
     );
 
 
-    this.addItem(new ItemBuilder(98, 78, 251, 175)
+    this.addItem(new ItemBuilder(103,520,297,696)
       .withTitle('glass_compartment')
       .clickable()
       .withCallBack(() => {

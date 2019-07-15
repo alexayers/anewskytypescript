@@ -21,7 +21,7 @@ export class Room14 extends Scene {
       .build()
     );
 
-    this.addItem(new ItemBuilder(149, 234, 206, 312)
+    this.addItem(new ItemBuilder(171,337,231,434)
       .withTitle('grave')
       .clickable()
       .withCallBack(() => {

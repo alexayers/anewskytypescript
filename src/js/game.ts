@@ -48,6 +48,7 @@ export default class Game implements EventHandler {
 
 		}, false);
 
+
 		this._ctx = this._canvas.getContext("2d");
 		this._ctx.imageSmoothingEnabled = false;
 		

@@ -30,21 +30,20 @@ export class Room10 extends Scene {
             .build()
         );
 
-        this.addItem(new ItemBuilder(250,395,323,716)
+        this.addItem(new ItemBuilder(250,398,323,716)
             .clickable()
             .withTitle('parachute')
             .withClickSound('sail.ogg')
             .withCallBack(() => {
                 this.clearMiddleground();
-          this.addMiddlegroundImage('room10/room10_no_chute_m.png')
-          let sail = new ItemBuilder(null, null, null, null)
-                    .withImage('parachute.png')
-                    .withTitle('parachute')
-                    .build();
+                this.addMiddlegroundImage('room10/room10_no_chute_m.png')
+                let sail = new ItemBuilder(null, null, null, null)
+                            .withImage('parachute.png')
+                            .withTitle('parachute')
+                            .build();
 
-          Inventory.getInstance().addToInventory(sail);
-          ItemManager.getInstance().getItem('parachute')
-                    .makeUnclickable();
+                Inventory.getInstance().addToInventory(sail);
+                ItemManager.getInstance().getItem('parachute').makeUnclickable();
 
             }
         )

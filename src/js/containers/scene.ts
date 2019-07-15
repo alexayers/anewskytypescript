@@ -43,6 +43,10 @@ export class Scene implements EventHandler {
 
     }
 
+    public addRenderCallBack(func: Function): void {
+        this._renderCallBack = func;
+    }
+
     public addClickCallback(func: Function): void {
         this._clickCallBack = func;
     }

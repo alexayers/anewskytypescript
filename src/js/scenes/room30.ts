@@ -11,8 +11,13 @@ import { ItemManager} from "../managers/itemmanager";
 
 export class Room30 extends Scene {
 
+    private _cross: HTMLImageElement;
+
     constructor() {
         super();
+
+        this._cross = new Image();
+        this._cross.src = 'resources/objects/crosshair.png';
 
         this.addBackgroundImage('room30/room30_1b.png');
 
@@ -67,6 +72,75 @@ export class Room30 extends Scene {
                     })
                     .build()
          );
+
+         this.addClickCallback(() => { 
+
+            let x = 0;
+            let y = 0;
+
+            let mapPadEnter = ItemManager.getInstance().getItem('mapPadEnter');
+      
+            if (mapPadEnter.value != 'ready') {
+              let coords = ItemManager.getInstance().getItem('mapPad').value.split(',');
+              let coordX = Number(coords[0]);
+              let coordY = Number(coords[1]);
+      
+              if (x >= 110 && x <= 140 &&
+                  y >= 308 && y <= 337) {
+                if (coordY < 4) {
+                    coordY += 1
+                }
+            } else if (x >= 162 && x <= 195 &&
+                  y >= 308 && y <= 337) {
+                if (coordY > 0) {
+                    coordY-= 1
+                }
+            } else if (x >= 218 && x <= 250 &&
+                  y >= 308 && y <= 337) {
+                if (coordX > 0) {
+                    coordX-= 1
+                }
+            } else if (x >= 271 && x <= 382 &&
+                  y >= 308 && y <= 337) {
+                if (coordX < 5) {
+                    coordX += 1
+                }
+            }
+      
+              let value = coordX + ',' + coordY;
+              ItemManager.getInstance().getItem('mapPad').value = value;
+              AudioManager.getInstance().play('good_code.ogg');
+            } else {
+              AudioManager.getInstance().play('bad_code.ogg');
+            }
+          });
+      
+          this.addRenderCallBack(() => {
+            let coords = ItemManager.getInstance().getItem('mapPad').value.split(',');
+            let x = Number(coords[0]);
+            let y = Number(coords[1]);
+      
+            let xOffset = 55;
+            let yOffset = 33;
+
+            let canvas = <HTMLCanvasElement>document.getElementById('canvas');
+		    let ctx = canvas.getContext("2d");
+      
+            for (let r = 0; r <=5 ; r++) {
+                for (let c = 0; c <=6 ; c++) {
+       
+                    if (c == x && r == y) {
+                        ctx.drawImage(this._cross, xOffset, yOffset, 11, 11);
+                    }
+            
+                    xOffset += 44;
+                }
+      
+                xOffset = 55
+                yOffset += 44
+            }
+        });
+      
 
          this.addAmbience('maproom.ogg');
     }

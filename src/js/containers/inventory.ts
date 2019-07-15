@@ -70,7 +70,7 @@ export class Inventory {
 
             if (item != null) {
                 if (x >= offset &&
-                    x <= offset + 260 &&
+                    x <= offset + 96 &&
                     y >= 200 &&
                     y <= 268) {
 
@@ -90,7 +90,7 @@ export class Inventory {
             }
 
             idx++;
-            offset += 260;
+            offset += 96;
 
         });
     }

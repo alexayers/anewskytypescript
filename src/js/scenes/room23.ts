@@ -24,7 +24,7 @@ export class Room23 extends Scene {
             .withWalkSound('walk_sand.ogg')
             .build()
         );
-        this.addDoor(new DoorBuilder(0, 196, 65, 233)
+        this.addDoor(new DoorBuilder(8, 423, 65, 520)
             .withDestination('room26')
             .withWalkSound('walk_computer.ogg')
             .build()
