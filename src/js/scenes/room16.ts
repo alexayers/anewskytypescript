@@ -36,7 +36,7 @@ export class Room16 extends Scene {
       .build()
     );
 
-    this.addItem(new ItemBuilder(141, 164, 204, 206)
+    this.addItem(new ItemBuilder(165,487,236,549)
       .withTitle('generator')
       .clickable()
       .withValue('not_powered')

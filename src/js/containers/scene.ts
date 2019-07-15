@@ -22,6 +22,7 @@ export class Scene implements EventHandler {
         this._background = new AnimatedFrame();
         this._middleground = new AnimatedFrame();
         this._foreground = new AnimatedFrame();
+        this._ambientSound = null;
 
         this._items = new Array();
         this._doors = new Array();
@@ -40,7 +41,8 @@ export class Scene implements EventHandler {
     }
 
     public addAmbience(filename: string): void {
-
+        this._ambientSound = filename;
+        AudioManager.getInstance().registerLoop(filename);
     }
 
     public addRenderCallBack(func: Function): void {
@@ -53,11 +55,15 @@ export class Scene implements EventHandler {
 
     public playAmbience(): void {
         if (this._ambientSound != null) {
-
+            console.log("Playing loop " + this._ambientSound);
+            AudioManager.getInstance().playLooped(this._ambientSound);
         }
     }
 
     public stopAmbience(): void {
+        if (this._ambientSound != null) {
+            AudioManager.getInstance().stop(this._ambientSound);
+        }
 
     }
 

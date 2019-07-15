@@ -56,7 +56,7 @@ export class Item extends ClickBox implements EventHandler {
 
         if (this.isPointInSquare(x, y)) {
             if (this._clickSound != null) {
-
+                AudioManager.getInstance().play(this.clickSound);
             }
 
             if (this._canGrab && this._onScreen) {

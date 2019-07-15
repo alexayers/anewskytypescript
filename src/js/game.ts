@@ -4,6 +4,7 @@ import { Event } from "./event/event";
 import { EventBus, EventHandler } from "./event/eventbus";
 import { SceneManager } from "./managers/scenemanager";
 import { Inventory } from "./containers/inventory";
+import { AudioManager } from "./managers/audiomanager";
 
 export default class Game implements EventHandler {
 	private _canvas: HTMLCanvasElement;
@@ -62,7 +63,7 @@ export default class Game implements EventHandler {
 	public init(): void {
 		console.log("Initializing game...")
 		this._sceneManager = SceneManager.getInstance();
-
+		AudioManager.getInstance().playLooped("begin.ogg");
 
 		console.log("Game initialized!")
 	}

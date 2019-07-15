@@ -7,9 +7,9 @@ export class Room2 extends Scene {
     constructor() {
         super();
 
-        this.addBackgroundImage('room2/room2_1b.png')
+        this.addBackgroundImage('room2/room2_1b.png');
 
-        this.addAmbience('bad_light.ogg')
+        this.addAmbience('bad_light.ogg');
 
         this.addDoor(new DoorBuilder(276,273,399,539)
                 .withDestination('room1')

@@ -19,6 +19,7 @@ export class Room1 extends Scene {
         this.addForegroundImage('room1/room1_1f.png');
         this.addForegroundImage('room1/room1_2f.png');
         this.addForegroundImage('room1/room1_3f.png');
+        this.addAmbience('bad_light.ogg');
 
         this.addDoor(
             new DoorBuilder(1,274,41,800)

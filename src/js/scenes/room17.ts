@@ -34,9 +34,9 @@ export class Room17 extends Scene {
           this.clearMiddleground();
     
             let pinkCrystal = new ItemBuilder(null, null, null, null)
-          .withImage('pink_crystal.png')
-          .withTitle('pink_crystal')
-          .build();
+              .withImage('pink_crystal.png')
+              .withTitle('pink_crystal')
+              .build();
           
             Inventory.getInstance().addToInventory(pinkCrystal);
             ItemManager.getInstance().getItem('glass_compartment').makeUnclickable();

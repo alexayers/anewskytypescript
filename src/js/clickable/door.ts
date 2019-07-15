@@ -113,6 +113,7 @@ export class DoorBuilder {
 
     public withWalkSound(filename: string): DoorBuilder {
         this._walkSound = filename;
+        AudioManager.getInstance().register(this._walkSound);
         return this;
     }
 
