@@ -5,14 +5,14 @@
 
 A point and click escape style game. 
 
-##To Develop
+## To Develop
 
 npm i
 
-##To Build
+## To Build
 
 npm run build
 
-##To Run:
+## To Run:
 
 npm run dev
